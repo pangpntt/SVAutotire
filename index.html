@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+  <title>Lovely Pet</title>
+</head>
+
+<body>
+  <nav class="navbar">
+
+    <div id="navMenu" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item">
+          <img src="img/logo2.png" alt="logo" style="width: 40px; height: 40px;">
+        </a>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <a class="navbar-item has-text-black pr-5 pl-5">
+            สัตว์เลี้ยง
+          </a>
+          <a class="navbar-item has-text-black pr-5 pl-5">
+            บันทึกสัตว์เลี้ยง
+          </a>
+          <div class="buttons">
+            <a class="button is-dark">Register</a>
+            <a class="button is-light">LogIn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero is-link is-fullheight-with-navbar">
+    <div class="hero-body">
+      <div class="slideshow-container">
+        <div class="mySlides fade">
+          <img src="img/index.png" alt="" width="800" height="435">
+        </div>
+        <div class="mySlides fade">
+          <img src="https://i.pinimg.com/564x/cd/37/37/cd37372d1c3717fc8b23cda119f3cab0.jpg" alt="" width="800"
+            height="435"">
+        </div>
+        <div class=" mySlides fade">
+          <img src="https://i.pinimg.com/564x/4c/09/9e/4c099e544fc1e9ca4c0321f9b7762036.jpg" alt="" width="800"
+            height="435">
+        </div>
+      </div>
+
+
+      <div class="">
+        <p class="title has-text-black" id="title_index">
+          Happy Pets
+        </p>
+        <p class="subtitle has-text-black has-text-centered pt-5">
+          <button class="button is-large">Let's go</button>
+        </p>
+      </div>
+    </div>
+  </section>
+</body>
+
+
+<script>
+  let slideIndex = 0;
+  showSlides();
+
+  function showSlides() {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) { slideIndex = 1 }
+    slides[slideIndex - 1].style.display = "block";
+    setTimeout(showSlides, 3000); // Change image every 2 seconds
+  }
+</script>
+
+</html>
