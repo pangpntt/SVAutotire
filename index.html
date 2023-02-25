@@ -11,6 +11,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/b5f8819a59.js" crossorigin="anonymous"></script>
   <title>SVAutotire Sale & Service</title>
 </head>
 
@@ -52,18 +54,22 @@
           <div class="columns">
             <div class="column">
               <p class="control has-icons-left">
+
+                <span class="icon">
+                  <i class="fa fa-search"></i>
+                </span>
                 <input class="input" type="text" placeholder="ค้นหาชื่อสินค้า" style="width: 200px; height: 40px;">
-                <span class="">
-                  <i class="fas fa-home"></i>
+
+                <span class="icon">
+                  <i class="fa fa-search"></i>
                 </span>
                 <input class="input" type="text" placeholder="ค้นหายี่ห้อสินค้า" style="width: 200px; height: 40px;">
+
                 <span class="icon">
                   <i class="fa fa-search"></i>
                 </span>
                 <input class="input" type="text" placeholder="ค้นหาปีของสินค้า" style="width: 200px; height: 40px;">
-                <span class="icon">
-                  <i class="fa fa-search"></i>
-                </span>
+
               </p>
             </div>
           </div>
@@ -71,7 +77,12 @@
 
         <!-- ปุ่มเพิ่มสินค้า -->
         <div>
-          <button class="button is-primary">เพิ่มสินค้า</button>
+          <button class="button is-primary">
+            <span class="icon">
+              <i class="fa-regular fa-square-plus fa-lg"></i>
+            </span>
+            <p>เพิ่มสินค้า</p>
+          </button>
         </div>
         
         <!-- ตารางสินค้า -->
@@ -103,21 +114,21 @@
               <td></td>
               <td></td>
               <td></td>
-              <td>
-                <span class="icon">
-                  <i class="fas fa-trash"></i>
-                  
-                </span>
-              </td>
-              <td>
-                <span class="icon">
+              <td class="has-text-centered">
+                <span class="icon " id="iconTrash">
                   <i class="fas fa-trash"></i>
                 </span>
               </td>
-              <td>
+              <td class="has-text-centered">
                 <span class="icon">
-                  <i class="fas fa-trash"></i>
+                  <i class="fas fa-pen"></i>
                 </span>
+              </td>
+              <td class="has-text-centered">
+                <span class="icon">
+                  <i class="fa-solid fa-basket-shopping"></i>
+                </span>
+                
               </td>
             </tr>
           </tbody>

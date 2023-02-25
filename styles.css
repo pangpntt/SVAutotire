@@ -42,4 +42,20 @@
 .drop:hover .drop-content {
     display: block;
 }
+#iconTrash{
+    color: red;
+    
+}
+.loginPage{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+.loginFrom{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    
+}
+
 
