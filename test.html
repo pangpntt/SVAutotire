@@ -1,15 +1,168 @@
-<!DOCTYPE html>
-<html>
+<html lang="en" class="has-navbar-fixed-top">
+
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+    <script src="https://kit.fontawesome.com/b5f8819a59.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js">
 
+    <title>Document</title>
 </head>
+
 <body>
+    <!-- navbar -->
+    <nav class="navbar is-fixed-top box-shadow-y">
+        <div class="navbar-brand">
+            <a href="" class="navbar-burger toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+            <a href="" class="navbar-burger nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-end">
+                <a href="" class="navbar-item has-text-weight-semibold">SVAutotire Sale & Service</a>
+                <a href="" class="navbar-item">Logout</a>
+            </div>
+        </div>
 
-<i class="fa fa-cloud"></i>
-<i class="fa fa-heart"></i>
-<i class="fa fa-car"></i>
-<i class="fa fa-file"></i>
-<i class="fa fa-bars"></i>
+    </nav>
 
+    <div class="container-fluid">
+      <div class="columns">
+        <div class="column is-2-tablet">
+          <aside class="menu ">
+            <ul class="menu-list">
+              <li>
+                <a class="is-active" style="background-color: #253239;">สินค้าในสต็อก</a>
+                <ul>
+                  <li><a>ล้อ</a></li>
+                  <li><a>ยาง</a></li>
+                </ul>
+              </li>
+              <li>
+                <a class="is-active" style="background-color: #253239;">ประวัติการนำเข้าสินค้า-ขาย</a>
+                <ul>
+                  <li><a>ประวัติการนำเข้าสินค้า</a></li>
+                  <li><a>ประวัติการขาย</a></li>
+                </ul>
+              </li>
+              <li style="background-color: #253239;"><a style="color: white; background-color: #253239;">ข้อมูลลูกค้า</a></li>
+              <li style="background-color: #253239;"><a style="color: white; background-color: #253239;">คลังสินค้า</a></li>
+            </ul>
+          </aside> 
+      </div>
+      <div class="column is-10-tablet">
+        <div>
+          <h1 class="has-text-weight-semibold is-size-3  mb-5">สินค้าในสต็อก</h1>
+        </div>
+
+        <!-- ปุ่มเพิ่มสินค้า -->
+        <div>
+          <button class="button is-primary mb-5">
+            <span class="icon">
+              <i class="fa-regular fa-square-plus fa-lg"></i>
+            </span>
+            <p>เพิ่มสินค้า</p>
+          </button>
+        </div>
+
+        <!-- search -->
+        <div class="field">
+          <div class="columns">
+            <div class="column">
+              <p class="control has-icons-left">
+
+                <span class="icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <input class="input" type="text" placeholder="ค้นหารหัสสินค้า" style="width: 200px; height: 40px;">
+
+                <span class="icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <input class="input" type="text" placeholder="ค้นหาชื่อสินค้า" style="width: 200px; height: 40px;">
+
+                <span class="icon">
+                  <i class="fa fa-search"></i>
+                </span>
+                <input class="input" type="text" placeholder="ค้นหาปีของสินค้า" style="width: 200px; height: 40px;">
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ตารางสินค้า -->
+        <table class="table is-bordered is-striped is-hoverable is-fullwidth mt-4">
+          <thead>
+            <tr>
+              <th class="has-text-centered">รหัสสินค้า</th>
+              <th class="has-text-centered">ชื่อสินค้า</th>
+              <th class="has-text-centered">รูปสินค้า</th>
+              <th class="has-text-centered">ยี่ห้อ</th>
+              <th class="has-text-centered">รุ่น</th>
+              <th class="has-text-centered">ขนาด</th>
+              <th class="has-text-centered">สัปดาห์</th>
+              <th class="has-text-centered">ปี</th>
+              <th class="has-text-centered">ที่เก็บ</th>
+              <th class="has-text-centered">จำนวน</th>
+              <th colspan="3"></th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="has-text-centered">
+                <span class="icon " id="iconTrash">
+                  <i class="fas fa-trash"></i>
+                </span>
+              </td>
+              <td class="has-text-centered">
+                <span class="icon">
+                  <i class="fas fa-pen"></i>
+                </span>
+              </td>
+              <td class="has-text-centered">
+                <span class="icon">
+                  <i class="fa-solid fa-basket-shopping"></i>
+                </span>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+
+      </div>
+    </div>
+
+    <script src="scrips.js"></script>
+    
 </body>
+
 </html>
