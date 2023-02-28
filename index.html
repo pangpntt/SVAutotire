@@ -2,147 +2,220 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://kit.fontawesome.com/b5f8819a59.js" crossorigin="anonymous"></script>
-  <title>SVAutotire Sale & Service</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://kit.fontawesome.com/36abd084fe.css" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/36abd084fe.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
 </head>
 
 <body>
-
-  <div class="container-fluid">
-    <div class="columns is-mobile">
-      <div class="column is-2-tablet">
-        <div id="navbar">
-          <ul>
-            <li class="drop">
-              <a href="#" class="dropbtn">สินค้าในสต็อก</a>
-              <div class="drop-content">
-                <a href="index.html">ล้อ</a>
-                <a href="#">ยาง</a>
-              </div>
-            </li>
-            <li><a href="#">ประวัติการนำเข้าสินค้า</a></li>
-            <li><a href="#">ประวัติการซื้อสินค้า</a></li>
-            <li><a href="#">ข้อมูลลูกค้า</a></li>
-            <li><a href="#">คลังสินค้า</a></li>
-          </ul>
+    <div class="toggle" onclick="toggleMenu()"></div>
+    <script src="scrips.js"></script>
+    <div class="columns">
+        <div class="column is-1">
+            <div class="nav">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <span class="icon"><i class="fa-solid fa-store"></i></i></span>
+                            <span class="title">สินค้าในสต็อก</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="icon"><i class="fa-solid fa-money-bill"></i></span>
+                            <span class="title">ประวัติการนำเข้าสินค้า</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="icon"><i class="fa-solid fa-cart-shopping"></i></span>
+                            <span class="title">ประวัติการขายสินค้า</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                            <span class="title">ข้อมูลลูกค้า</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="icon"><i class="fa-solid fa-warehouse"></i></span>
+                            <span class="title">คลังสินค้า</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+                            <span class="title">ออกจากระบบ</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
+        <div class="column is-11">
+            <h1 class="has-text-weight-semibold is-size-3 mt-5 mb-5">สินค้าในสต็อก</h1>
+            <!-- modal เพิ่มสินค้า -->
+            <section id="app" class="mb-5">
+                <div class="block">
+                    <a class="button is-primary" @click="classArray.push('is-active')">
+                        <span class="icon">
+                            <i class="fa-regular fa-square-plus fa-lg"></i>
+                        </span>
+                        <p>เพิ่มสินค้า</p>
+                    </a>
+                </div>
+                <div :class="classArray">
+                    <div class="modal-background"></div>
+                    <div class="modal-card">
+                        <header class="modal-card-head">
+                            <p class="modal-card-title">เพิ่มสินค้า</p>
+                            <button class="delete" aria-label="close" @click="classArray.pop()"></button>
+                        </header>
+                        <section class="modal-card-body">
+                            <div class="content">
+                                <div class="field">
+                                    <label class="label">รหัสสินค้า</label>
+                                    <input class="input" type="text" placeholder="Text input" style="width: 200px;">
+                                </div>
+                                <div class="field">
+                                    <label class="label">ประเภทสินค้า</label>
+                                    <div class="control">
+                                        <div class="select">
+                                            <select>
+                                                <option>ล้อ</option>
+                                                <option>ยาง</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
 
-      <div class="column is-10-tablet">
-        <div>
-          <h1 style="margin-top: 10px; font-size: 20px; text-align: right; margin-right: 20px;">SVAutotire Sale &
-            Service &nbsp&nbsp&nbsp
-            <a href=""><img src="/img/logout.png" alt=""></a>
-          </h1>
-        </div>
-        <div>
-          <h1 class="has-text-weight-semibold is-size-3 mt-5 mb-5">สินค้าในสต็อก</h1>
-        </div>
+                                <div class="field">
+                                    <label class="label">ชื่อสินค้า</label>
+                                    <input class="input" type="text" placeholder="Text input">
+                                </div>
 
-        <!-- ปุ่มเพิ่มสินค้า -->
-        <div>
-          <button class="button is-primary mb-5">
-            <span class="icon">
-              <i class="fa-regular fa-square-plus fa-lg"></i>
-            </span>
-            <p>เพิ่มสินค้า</p>
-          </button>
-        </div>
+                                <div class="field">
+                                    <label class="label">ยี่ห้อ</label>
+                                    <input class="input" type="text" placeholder="Text input">
+                                </div>
 
-        <!-- search -->
-        <div class="field">
-          <div class="columns">
-            <div class="column">
-              <p class="control has-icons-left">
+                                <div class="field">
+                                    <label class="label">รุ่น</label>
+                                    <input class="input" type="text" placeholder="Text input">
+                                </div>
+                                <div class="field">
+                                    <label class="label">ขนาด</label>
+                                    <input class="input" type="text" placeholder="Text input">
+                                </div>
+                                <div class="field">
+                                    <label class="label">สัปดาห์</label>
+                                    <input class="input" type="text" placeholder="Text input">
+                                </div>
+                                <div class="field">
+                                    <label class="label">ปี</label>
+                                    <input class="input" type="text" placeholder="Text input">
+                                </div>
+                                <div class="field">
+                                    <label class="label">จำนวน</label>
+                                    <input class="input" type="text" placeholder="Text input">
+                                </div>
 
+                                <div class="field is-grouped">
+                                    <div class="control">
+                                        <button class="button is-link">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ปุ่ม search -->
+            <p class="control has-icons-left">
                 <span class="icon">
-                  <i class="fa fa-search"></i>
+                    <i class="fa fa-search"></i>
                 </span>
                 <input class="input" type="text" placeholder="ค้นหารหัสสินค้า" style="width: 200px; height: 40px;">
 
                 <span class="icon">
-                  <i class="fa fa-search"></i>
+                    <i class="fa fa-search"></i>
                 </span>
                 <input class="input" type="text" placeholder="ค้นหาชื่อสินค้า" style="width: 200px; height: 40px;">
 
                 <span class="icon">
-                  <i class="fa fa-search"></i>
+                    <i class="fa fa-search"></i>
                 </span>
                 <input class="input" type="text" placeholder="ค้นหาปีของสินค้า" style="width: 200px; height: 40px;">
-              </p>
-            </div>
-          </div>
+            </p>
+            <!-- ตารางแสดงสินค้า -->
+            <table class="table is-bordered is-striped is-hoverable is-fullwidth mt-5">
+                <thead>
+                    <tr>
+                        <th class="has-text-centered">รหัสสินค้า</th>
+                        <th class="has-text-centered">ชื่อสินค้า</th>
+                        <th class="has-text-centered">รูปสินค้า</th>
+                        <th class="has-text-centered">ยี่ห้อ</th>
+                        <th class="has-text-centered">รุ่น</th>
+                        <th class="has-text-centered">ขนาด</th>
+                        <th class="has-text-centered">สัปดาห์</th>
+                        <th class="has-text-centered">ปี</th>
+                        <th class="has-text-centered">ที่เก็บ</th>
+                        <th class="has-text-centered">จำนวน</th>
+                        <th colspan="3"></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="has-text-centered">
+                            <span class="icon" style="color: red;">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                        </td>
+                        <td class="has-text-centered">
+                            <span class="icon">
+                                <i class="fas fa-pen"></i>
+                            </span>
+                        </td>
+                        <td class="has-text-centered">
+                            <span class="icon">
+                                <i class="fa-solid fa-basket-shopping"></i>
+                            </span>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-
-
-        <!-- ตารางสินค้า -->
-        <table class="table is-bordered is-striped is-hoverable is-fullwidth mt-4">
-          <thead>
-            <tr>
-              <th class="has-text-centered">รหัสสินค้า</th>
-              <th class="has-text-centered">ชื่อสินค้า</th>
-              <th class="has-text-centered">รูปสินค้า</th>
-              <th class="has-text-centered">ยี่ห้อ</th>
-              <th class="has-text-centered">รุ่น</th>
-              <th class="has-text-centered">ขนาด</th>
-              <th class="has-text-centered">สัปดาห์</th>
-              <th class="has-text-centered">ปี</th>
-              <th class="has-text-centered">ที่เก็บ</th>
-              <th class="has-text-centered">จำนวน</th>
-              <th colspan="3"></th>
-
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td class="has-text-centered">
-                <span class="icon " id="iconTrash">
-                  <i class="fas fa-trash"></i>
-                </span>
-              </td>
-              <td class="has-text-centered">
-                <span class="icon">
-                  <i class="fas fa-pen"></i>
-                </span>
-              </td>
-              <td class="has-text-centered">
-                <span class="icon">
-                  <i class="fa-solid fa-basket-shopping"></i>
-                </span>
-
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-
-      </div>
-
     </div>
-  </div>
 
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                classArray: ['modal'],
+            }
+        })
+    </script>
 
 </body>
-<script src="scrips.js"></script>
-
-</html>
