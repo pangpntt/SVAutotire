@@ -16,6 +16,7 @@ body {
     background-color: #253239;
     transition: 0.5s;
     overflow: hidden;
+    z-index: 1;
 }
 
 .nav:hover, .nav.active {
