@@ -31,6 +31,7 @@
                     <label class="label">ชื่อผู้ใช้งาน</label>
                     <div class="control">
                       <input class="input" type="text" placeholder="กรอกชื่อผู้ใช้งาน" v-model="check_username">
+                      <span class="has-text-danger">{{error.username}}</span>
                     </div>
                   </div>
 
@@ -38,6 +39,7 @@
                     <label class="label">รหัสผ่าน</label>
                     <div class="control">
                       <input class="input" type="password" placeholder="กรอกรหัสผ่าน" v-model="check_password">
+                      <span class="has-text-danger">{{error.password}}</span>
                     </div>
                   </div>
 
@@ -63,22 +65,25 @@
           data: {
             check_username: '',
             check_password: '',
-            username: '',
-            password: '',
             members: member,
+            error : {
+              username: '',
+              password: ''
+            }
           },
           methods:{
             check_login(){
-              console.log(this.members)
               console.log(this.check_username)
               console.log(this.check_password)
-              if(this.members.filter(member =>{return member.emp_username.includes(this.check_username) || member.emp_username.includes(this.check_password)}) == true){
-                this.username = this.check_username
-                this.password = this.check_password
+              if(this.members.filter(member =>{return member.emp_username.includes(this.check_username) || member.emp_password.includes(this.check_password)}).length !== 0){
+                    localStorage.setItem('username', this.check_username)
+                    location.replace("./index.html");
               }
               else{
-                
+                this.error.username = 'กรุณากรอกชื่อผู้ใช้งานให้ถูกต้อง'
+                this.error.password = 'กรุณากรอกรหัสผ่านให้ถูกต้อง'
               }
+
               
             }
           },
