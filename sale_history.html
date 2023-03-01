@@ -1,0 +1,239 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://kit.fontawesome.com/36abd084fe.css" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/36abd084fe.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="toggle" onclick="toggleMenu()"></div>
+    <script src="scrips.js"></script>
+    <div class="columns">
+        <div class="column is-1">
+            <div class="nav">
+                <ul>
+                    <li>
+                        <a href="index.html">
+                            <span class="icon"><i class="fa-solid fa-store"></i></i></span>
+                            <span class="title">สินค้าในสต็อก</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="purchase_history.html">
+                            <span class="icon"><i class="fa-solid fa-money-bill"></i></span>
+                            <span class="title">การนำเข้าสินค้า</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="sale_history.html">
+                            <span class="icon"><i class="fa-solid fa-cart-shopping"></i></span>
+                            <span class="title">การขายสินค้า</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="customer.html">
+                            <span class="icon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                            <span class="title">ข้อมูลลูกค้า</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="warehouse.html">
+                            <span class="icon"><i class="fa-solid fa-warehouse"></i></span>
+                            <span class="title">คลังสินค้า</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+                            <span class="title">ออกจากระบบ</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="column is-11">
+            <section id="app">
+                <h1 class="has-text-weight-semibold is-size-3 mt-5 mb-5">ขายสินค้า</h1>
+                <div class="block">
+                    <a class="button is-primary" @click="classArray.push('is-active')">
+                        <span class="icon">
+                            <i class="fa-regular fa-square-plus fa-lg"></i>
+                        </span>
+                        <p>เพิ่มข้อมูลการขายเข้าสินค้า</p>
+                    </a>
+                </div>
+                <div id="modal3" :class="classArray">
+                    <div class="modal-background"></div>
+                    <div class="modal-card">
+                        <header class="modal-card-head">
+                            <p class="modal-card-title">ขายสินค้า</p>
+                            <button class="delete" aria-label="close" @click="classArray.pop()"></button>
+                        </header>
+                        <section class="modal-card-body">
+                            <div class="content">
+                                <div class="columns">
+                                    <div class="column">
+                                        <label>รหัสสินค้า</label>
+                                        <input class="input" />
+                                    </div>
+                                </div>
+                                <div class="columns">
+                                    <div class="column">
+                                        <label>ชื่อสินค้า</label>
+                                        <input class="input" />
+                                    </div>
+                                    <div class="column">
+                                        <label>ประเภทสินค้า</label><br>
+                                        <div class="select">
+                                            <select class="select">
+                                                <option>ล้อ</option>
+                                                <option>ยาง</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="columns">
+                                    <div class="column">
+                                        <label>พนักงานขาย</label>
+                                        <input class="input" />
+                                    </div>
+                                    <div class="column">
+                                        <label>วันที่ขาย</label>
+                                        <input class="input" type="date" />
+                                    </div>
+                                </div>
+                                <div class="columns">
+                                    <div class="column">
+                                        <label>ราคาที่ขาย</label>
+                                        <input class="input" type="number" />
+                                    </div>
+                                    <div class="column">
+                                        <label>จำนวน</label>
+                                        <input class="input" type="number" />
+                                    </div>
+                                </div>
+                                <div class="columns">
+                                    <div class="column">
+                                        <label class="checkbox">
+                                            <input type="checkbox">
+                                            ลูกค้าเก่า
+                                        </label>
+                                    </div>
+                                    <div class="column">
+                                        <label>รายชื่อลูกค้าเก่า</label><br>
+                                        <div class="select">
+                                            <select class="select">
+                                                <option>ล้อ</option>
+                                                <option>ยาง</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="columns">
+                                    <div class="column">
+                                        <label class="checkbox">
+                                            <input type="checkbox">
+                                            ลูกค้าใหม่
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="columns">
+                                    <div class="column">
+                                        <label>ชื่อ</label>
+                                        <input class="input" />
+                                    </div>
+                                    <div class="column">
+                                        <label>นามสกุล</label>
+                                        <input class="input" />
+                                    </div>
+                                </div>
+                                <div class="columns">
+                                    <div class="column">
+                                        <label>ป้ายทะเบียนรถ</label>
+                                        <input class="input" />
+                                    </div>
+                                    <div class="column">
+                                        <label>ไมล์รถ</label>
+                                        <input class="input" />
+                                    </div>
+                                </div>
+                                <div class="field is-grouped">
+                                    <div class="control">
+                                        <button class="button is-link">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <!-- ค้นหา -->
+                <div class="control has-icons-left">
+                    <span class="icon">
+                        <i class="fa fa-search"></i>
+                    </span>
+                    <input class="input" type="text" placeholder="ค้นหาชื่อสินค้า" style="width: 200px; height: 40px;">
+
+                    <span class="icon">
+                        <i class="fa fa-search"></i>
+                    </span>
+                    <input class="input" type="text" placeholder="ค้นหาชื่อลูกค้า" style="width: 200px; height: 40px;">
+
+                    <span class="icon">
+                        <i class="fa fa-search"></i>
+                    </span>
+                    <input class="input" type="date" placeholder="ค้นหาวันที่ขาย" style="width: 200px; height: 40px;">
+                </div>
+                <!-- ตารางแสดงข้อมูล -->
+                <table class="table is-bordered is-striped is-hoverable is-fullwidth mt-5">
+                    <thead>
+                        <tr>
+                            <th class="has-text-centered">รหัสสินค้า</th>
+                            <th class="has-text-centered">ชื่อสินค้า</th>
+                            <th class="has-text-centered">รูปสินค้า</th>
+                            <th class="has-text-centered">ประเภทสินค้า</th>
+                            <th class="has-text-centered">ลูกค้า</th>
+                            <th class="has-text-centered">พนักงานขาย</th>
+                            <th class="has-text-centered">วันที่ขาย</th>
+                            <th class="has-text-centered">ราคาที่ขาย</th>
+                            <th class="has-text-centered">จำนวน</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                classArray: ['modal'],
+            }
+        })
+    </script>
+</body>
+
+</html>
