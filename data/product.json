@@ -1,12 +1,41 @@
 [{
-    "PRODUCT_ID": 1,
-    "PRODUCT_NAME": "Gibby",
-    "PRODUCT_MANNER": "1234567890",
-    "PRODUCT_VERSION": "Gibby",
-    "PRODUCT_IMAGE": "Sannes",
-    "PRODUCT_SIZE": "Manager",
-    "PRODUCT_WEEK": 24,
-    "PRODUCT_TYPE": "2021",
-    "PRODUCT_YEAR": "",
-    "WARE_HOUSE_ID": 2
+    "PRODUCT_ID": "A106",
+    "PRODUCT_NAME": "HF-5",
+    "PRODUCT_MANNER": "VOSSEN",
+    "PRODUCT_VERSION": "HYBRID FORGED",
+    "PRODUCT_IMAGE": "",
+    "PRODUCT_SIZE": "19x8.5",
+    "PRODUCT_WEEK": "-",
+    "PRODUCT_TYPE": "Alloy wheels",
+    "PRODUCT_YEAR": "2021",
+    "PRODUCT_PRICE": "190000",
+    "PRODUCT_AMOUNT": "5",
+    "WARE_HOUSE_ID": "H2"
+},{
+    "PRODUCT_ID": "A108",
+    "PRODUCT_NAME": "HF-7",
+    "PRODUCT_MANNER": "VOSSEN",
+    "PRODUCT_VERSION": "HYBRID FORGED",
+    "PRODUCT_IMAGE": "",
+    "PRODUCT_SIZE": "20x9.5",
+    "PRODUCT_WEEK": "-",
+    "PRODUCT_TYPE": "Alloy wheels",
+    "PRODUCT_YEAR": "2021",
+    "PRODUCT_PRICE": "240000",
+    "PRODUCT_AMOUNT": "3",
+    "WARE_HOUSE_ID": "B4"
+},{
+    "PRODUCT_ID": "A231",
+    "PRODUCT_NAME": "PILOT SPORT EV",
+    "PRODUCT_MANNER": "MICHELIN",
+    "PRODUCT_VERSION": "",
+    "PRODUCT_IMAGE": "",
+    "PRODUCT_SIZE": "20",
+    "PRODUCT_WEEK": "35",
+    "PRODUCT_TYPE": "tyres",
+    "PRODUCT_YEAR": "2023",
+    "PRODUCT_PRICE": "21400",
+    "PRODUCT_AMOUNT": "19",
+    "WARE_HOUSE_ID": "B4"
+    
 }]

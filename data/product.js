@@ -1,88 +1,41 @@
 const product = JSON.parse(`[{
-    "pro_id": 1,
-    "pro_name": "Gibby",
-    "pro_img": "1234567890",
-    "pro_brand": "Gibby",
-    "pro_version": "Sannes",
-    "pro_size": "Manager",
-    "pro_week":
-  }, {
-    "emp_id": 2,
-    "emp_username": "Lissy",
-    "emp_password": "1234567890",
-    "emp_fname": "Lissy",
-    "role": "Manager",
-    "emp_lname": "Luckes"
-
-  }, {
-    "emp_id": 3,
-    "emp_username": "Benedicto",
-    "emp_password": "1234567890",
-    "emp_fname": "Benedicto",
-    "role": "Manager",
-    "emp_lname": "Copplestone"
-
-  }, {
-    "emp_id": 4,
-    "emp_username": "Fluke",
-    "emp_password": "1234567890",
-    "emp_fname": "Fluke",
-    "role": "Employee",
-    "emp_lname": "Jirayu"
-
-  }, {
-    "emp_id": 5,
-    "emp_username": "Fluke",
-    "emp_password": "1234567890",
-    "emp_fname": "Garv",
-    "role": "Employee",
-    "emp_lname": "MacCaughey"
-
-  }, {
-    "emp_id": 6,
-    "emp_username": "Martina",
-    "emp_password": "1234567890",
-    "emp_fname": "Martina",
-    "role": "Employee",
-    "emp_lname": "Siggin"
-
-  }, {
-    "emp_id": 7,
-    "emp_username": "Mac",
-    "emp_password": "1234567890",
-    "emp_fname": "Mac",
-    "role": "Employee",
-    "emp_lname": "Sakarn"
-
-  }, {
-    "emp_id": 8,
-    "emp_username": "Zacharie",
-    "emp_password": "1234567890",
-    "emp_fname": "Zacharie",
-    "role": "Employee",
-    "emp_lname": "McElory"
-
-  }, {
-    "emp_id": 9,
-    "emp_username": "Bjorn",
-    "emp_password": "1234567890",
-    "emp_fname": "Bjorn",
-    "role": "Employee",
-    "emp_lname": "Krzyzanowski"
-
-  }, {
-    "emp_id": 10,
-    "emp_username": "Jim",
-    "emp_password": "1234567890",
-    "emp_fname": "Jim",
-    "role": "Employee",
-    "emp_lname": "Robo"
-
-  },{
-    "emp_id": 11,
-    "emp_username": "cap",
-    "emp_password": "1234567890",
-    "emp_fname": "cap",
-    "role": "Employee",
-    "emp_lname": "tain"
-  }]`)
+    "PRODUCT_ID": "A106",
+    "PRODUCT_NAME": "HF-5",
+    "PRODUCT_MANNER": "VOSSEN",
+    "PRODUCT_VERSION": "HYBRID FORGED",
+    "PRODUCT_IMAGE": "./data/img_product/hf-5.jpg",
+    "PRODUCT_SIZE": "19x8.5",
+    "PRODUCT_WEEK": "-",
+    "PRODUCT_TYPE": "ล้อ",
+    "PRODUCT_YEAR": "2021",
+    "PRODUCT_PRICE": "190000",
+    "PRODUCT_AMOUNT": "5",
+    "WARE_HOUSE_ID": "H2"
+},{
+    "PRODUCT_ID": "A108",
+    "PRODUCT_NAME": "HF-7",
+    "PRODUCT_MANNER": "VOSSEN",
+    "PRODUCT_VERSION": "HYBRID FORGED",
+    "PRODUCT_IMAGE": "./data/img_product/hf-7.jpg",
+    "PRODUCT_SIZE": "20x9.5",
+    "PRODUCT_WEEK": "-",
+    "PRODUCT_TYPE": "ล้อ",
+    "PRODUCT_YEAR": "2021",
+    "PRODUCT_PRICE": "240000",
+    "PRODUCT_AMOUNT": "3",
+    "WARE_HOUSE_ID": "B4"
+},{
+    "PRODUCT_ID": "A231",
+    "PRODUCT_NAME": "PILOT SPORT EV",
+    "PRODUCT_MANNER": "MICHELIN",
+    "PRODUCT_VERSION": "",
+    "PRODUCT_IMAGE": "./data/img_product/PILOT_SPORT_EV.jpg",
+    "PRODUCT_SIZE": "20",
+    "PRODUCT_WEEK": "35",
+    "PRODUCT_TYPE": "ยางรถ",
+    "PRODUCT_YEAR": "2023",
+    "PRODUCT_PRICE": "21400",
+    "PRODUCT_AMOUNT": "19",
+    "WARE_HOUSE_ID": "B4"
+    
+}]`)
