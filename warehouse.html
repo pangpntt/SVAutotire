@@ -51,7 +51,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="login.html">
                             <span class="icon"><i class="fa-solid fa-right-from-bracket"></i></span>
                             <span class="title">ออกจากระบบ</span>
                         </a>
@@ -63,6 +63,16 @@
         <div class="column is-11">
             <section id="app">
                 <h1 class="has-text-weight-semibold is-size-3 mt-5 mb-5">คลังสินค้า</h1>
+                <!-- เพิ่มคลังสินค้า -->
+                <div class="block">
+                    <a class="button is-primary" @click="classArray2.push('is-active')">
+                        <span class="icon">
+                            <i class="fa-regular fa-square-plus fa-lg"></i>
+                        </span>
+                        <p>เพิ่มข้อมูลคลังสินค้า</p>
+                    </a>
+                </div>
+
                 <!-- search -->
                 <div class="control has-icons-left">
                     <span class="icon">
@@ -78,7 +88,7 @@
                             <th class="has-text-centered">ชื่อสินค้า</th>
                             <th class="has-text-centered">ที่เก็บ</th>
                             <th class="has-text-centered">จำนวน</th>
-                            <th></th>
+                            <th colspan="2"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -93,9 +103,79 @@
                                 </span>
                             </a>
                         </td>
+                        <td class="has-text-centered">
+                            <a @click="isActive = true">
+                                <span class="icon">
+                                    <i class="fas fa-trash has-text-danger"></i>
+                                </span>
+                            </a>
+                        </td>
                     </tbody>
                 </table>
-                <div id="modal" :class="classArray">
+                <div id="modal" :class="{modal: modal, 'is-active': isActive}">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                        <div class="card">
+                            <div class="card-content">
+                                <p class="title">
+                                    ต้องการลบข้อมูลคลังสินค้าหรือไม่
+                                </p>
+                            </div>
+                            <footer class="card-footer">
+                                <p class="card-footer-item has-background-primary">
+                                    <span>
+                                        <a class="has-text-white">ยืนยัน</a>
+                                    </span>
+                                </p>
+                                <p class="card-footer-item has-background-danger">
+                                    <span>
+                                        <a class="has-text-white">ยกเลิก</a>
+                                    </span>
+                                </p>
+                            </footer>
+                        </div>
+                    </div>
+                    <button class="modal-close is-large" aria-label="close" @click="isActive = false"></button>
+                </div>
+                <div id="modal1" :class="classArray2">
+                    <div class="modal-background"></div>
+                    <div class="modal-card">
+                        <header class="modal-card-head">
+                            <p class="modal-card-title">เพิ่มข้อมูลคลังสินค้า</p>
+                            <button class="delete" aria-label="close" @click="classArray2.pop()"></button>
+                        </header>
+                        <section class="modal-card-body">
+                            <div class="content">
+                                <div class="columns">
+                                    <div class="column">
+                                        <label>รหัสสินค้า</label>
+                                        <input class="input" />
+                                    </div>
+                                    <div class="column">
+                                        <label>ชื่อสินค้า</label>
+                                        <input class="input" />
+                                    </div>
+                                </div>
+                                <div class="columns">
+                                    <div class="column">
+                                        <label>ที่เก็บ</label>
+                                        <input class="input" />
+                                    </div>
+                                    <div class="column">
+                                        <label>จำนวน</label>
+                                        <input class="input" type="number"/>
+                                    </div>
+                                </div>
+                                
+                                <div class="field is-grouped">
+                                    <div class="control">
+                                        <button class="button is-link">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div id="modal2" :class="classArray">
                     <div class="modal-background"></div>
                     <div class="modal-card">
                         <header class="modal-card-head">
@@ -141,7 +221,10 @@
         var app = new Vue({
             el: '#app',
             data: {
+                modal: true,
+                isActive: false,
                 classArray: ['modal'],
+                classArray2: ['modal']
             }
         })
     </script>
