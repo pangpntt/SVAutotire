@@ -18,7 +18,7 @@
     <div class="toggle" onclick="toggleMenu()"></div>
     <script src="scrips.js"></script>
 
-    <div class="columns">
+    <div class="columns" id="app">
         <div class="column is-1">
             <div class="nav">
                 <ul>
@@ -83,14 +83,14 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                    <tbody class="has-text-centered">
+                        <tr v-for="(customer, index) in customers">
+                            <td>{{customer.CUSTOMER_FIRSTNAME}}</td>
+                            <td>{{customer.CUSTOMER_LASTNAME}}</td>
+                            <td>{{customer.CUSTOMER_NUMBER}}</td>
+                            <td>{{customer.CUSTOMER_MILEAGE}}</td>
                             <td class="has-text-centered">
-                                <a @click="classArray.push('is-active')">
+                                <a @click="classArray.push('is-active'), edit_cus(index)">
                                     <span class="icon">
                                         <i class="fas fa-pen"></i>
                                     </span>
@@ -111,27 +111,27 @@
                                 <div class="columns">
                                     <div class="column">
                                         <label>ชื่อ</label>
-                                        <input class="input" />
+                                        <input v-model="edit.fname" class="input" />
                                     </div>
                                     <div class="column">
                                         <label>นามสกุล</label>
-                                        <input class="input" />
+                                        <input v-model="edit.lname" class="input" />
                                     </div>
                                 </div>
                                 <div class="columns">
                                     <div class="column">
                                         <label>ป้ายทะเบียนรถ</label>
-                                        <input class="input" />
+                                        <input v-model="edit.number" class="input" />
                                     </div>
                                     <div class="column">
                                         <label>จำนวนไมล์รถ</label>
-                                        <input class="input" />
+                                        <input v-model="edit.mileage" class="input" type="number"/>
                                     </div>
                                 </div>
                                 
                                 <div class="field is-grouped">
                                     <div class="control">
-                                        <button class="button is-link">Submit</button>
+                                        <button @click="update_emp" class="button is-link">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -139,15 +139,42 @@
                 </div>
             </section>
         </div>
-        <script>
-            var app = new Vue({
-                el: '#app',
-                data: {
-                    classArray: ['modal'],
+    </div>
+    <script src="./data/customer.js"></script>
+    <script> 
+        var app = new Vue({
+            el: '#app',
+            data: {
+                classArray: ['modal'],
+                customers: customer,
+                edit:{
+                    fname: null,
+                    lname: null,
+                    number: null,
+                    mileage: null
+                },
+                edit_index: null,
+            },methods:{
+                edit_cus(index){
+                    edit_index = index
+                    this.edit.fname = this.customers[edit_index].CUSTOMER_FIRSTNAME
+                    this.edit.lname = this.customers[edit_index].CUSTOMER_LASTNAME
+                    this.edit.number = this.customers[edit_index].CUSTOMER_NUMBER
+                    this.edit.mileage = this.customers[edit_index].CUSTOMER_MILEAGE
+                    
+                },
+                update_emp(){
+                    this.customers[edit_index].CUSTOMER_FIRSTNAME = this.edit.fname 
+                    this.customers[edit_index].CUSTOMER_LASTNAME = this.edit.lname 
+                    this.customers[edit_index].CUSTOMER_NUMBER = this.edit.number
+                    this.customers[edit_index].CUSTOMER_MILEAGE = this.edit.mileage
+                    this.classArray.pop()
                 }
-            })
-        </script>
+            }
+            
+        })
 
+    </script>
 </body>
 
 </html>

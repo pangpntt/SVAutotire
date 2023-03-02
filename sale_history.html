@@ -209,28 +209,43 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                        <tr v-for="(sale_history,index) in sale_histories" class="has-text-centered">
+                            <td>{{sale_history.PRODUCT_ID}}</td>
+                            <td>{{sale_history.PRODUCT_NAME}}</td>
+                            <td><img alt="รูปสินค้า" id="img_in_table" :src="sale_history.PRODUCT_IMAGE"></td>
+                            <td>{{sale_history.PRODUCT_TYPE}}</td>
+                            <td>{{sale_history.CUSTOMER_NAME}}</td>
+                            <td>{{sale_history.EMPLOYEE_NAME}}</td>
+                            <td>{{sale_history.SALE_HISTORY_DATE}}</td>
+                            <td>{{sale_history.SALE_HISTORY_PRICE}}</td>
+                            <td>{{sale_history.SALE_HISTORY_AMOUNT}}</td>
                         </tr>
                     </tbody>
                 </table>
             </section>
         </div>
     </div>
-
+    <script src="data/sale_history.js"></script>
     <script>
         var app = new Vue({
             el: '#app',
             data: {
                 classArray: ['modal'],
+                sale_histories: sale_history,
+                add_sale_history: {
+                    id: null,
+                    name: null,
+                    img: null,
+                    type: null,
+                    cus: null,
+                    emp: null,
+                    date: null,
+                    price: null,
+                    amount: null
+                }
+            },
+            methods:{
+                
             }
         })
     </script>

@@ -81,21 +81,16 @@
                     <input class="input" type="text" placeholder="ค้นหาคลังสินค้า" style="width: 200px; height: 40px;">
                 </div>
                 <!-- ตารางแสดงข้อมูลคลังสินค้า -->
-                <table class="table is-bordered is-striped is-hoverable is-fullwidth mt-5">
+                <table class="table is-bordered is-striped is-hoverable is-fullwidth mt-5 has-text-centered">
                     <thead>
                         <tr>
-                            <th class="has-text-centered">รหัสสินค้า</th>
-                            <th class="has-text-centered">ชื่อสินค้า</th>
-                            <th class="has-text-centered">ที่เก็บ</th>
-                            <th class="has-text-centered">จำนวน</th>
+                            <th class="has-text-centered">รหัสคลังสินค้า</th>
                             <th colspan="2"></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tbody v-for="(warehouse, index) in warehouses">
+                        <td>{{warehouse}}</td>
+
                         <td class="has-text-centered">
                             <a @click="classArray.push('is-active')">
                                 <span class="icon">
@@ -112,6 +107,7 @@
                         </td>
                     </tbody>
                 </table>
+
                 <div id="modal" :class="{modal: modal, 'is-active': isActive}">
                     <div class="modal-background"></div>
                     <div class="modal-content">
@@ -137,6 +133,7 @@
                     </div>
                     <button class="modal-close is-large" aria-label="close" @click="isActive = false"></button>
                 </div>
+
                 <div id="modal1" :class="classArray2">
                     <div class="modal-background"></div>
                     <div class="modal-card">
@@ -148,28 +145,15 @@
                             <div class="content">
                                 <div class="columns">
                                     <div class="column">
-                                        <label>รหัสสินค้า</label>
-                                        <input class="input" />
+                                        <label>รหัสคลังสินค้า</label>
+                                        <input v-model="add" class="input"/>
                                     </div>
                                     <div class="column">
-                                        <label>ชื่อสินค้า</label>
-                                        <input class="input" />
                                     </div>
                                 </div>
-                                <div class="columns">
-                                    <div class="column">
-                                        <label>ที่เก็บ</label>
-                                        <input class="input" />
-                                    </div>
-                                    <div class="column">
-                                        <label>จำนวน</label>
-                                        <input class="input" type="number"/>
-                                    </div>
-                                </div>
-                                
                                 <div class="field is-grouped">
                                     <div class="control">
-                                        <button class="button is-link">Submit</button>
+                                        <button @click="add_warehouse()" class="button is-link">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -216,7 +200,7 @@
             </section>
         </div>
     </div>
-
+    <script src="./data/warehouse.js"></script>
     <script>
         var app = new Vue({
             el: '#app',
@@ -224,7 +208,16 @@
                 modal: true,
                 isActive: false,
                 classArray: ['modal'],
-                classArray2: ['modal']
+                classArray2: ['modal'],
+                warehouses: warehouse,
+                add: null,
+            },
+            methods:{
+                add_warehouse(){
+                    this.warehouses.push(this.add)
+                    this.add = null
+                    this.classArray2.pop()
+                }
             }
         })
     </script>
