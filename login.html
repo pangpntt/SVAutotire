@@ -31,7 +31,7 @@
                     <label class="label">ชื่อผู้ใช้งาน</label>
                     <div class="control">
                       <input class="input" type="text" placeholder="กรอกชื่อผู้ใช้งาน" v-model="check_username">
-                      <span class="has-text-danger">{{error.username}}</span>
+                      <span v-if="error === true" class="has-text-danger">กรุณากรอกชื่อผู้ใช้งานให้ถูกต้อง</span>
                     </div>
                   </div>
 
@@ -39,7 +39,7 @@
                     <label class="label">รหัสผ่าน</label>
                     <div class="control">
                       <input class="input" type="password" placeholder="กรอกรหัสผ่าน" v-model="check_password">
-                      <span class="has-text-danger">{{error.password}}</span>
+                      <span v-if="error === true" class="has-text-danger">กรุณากรอกรหัสผ่านให้ถูกต้อง</span>
                     </div>
                   </div>
 
@@ -66,10 +66,7 @@
             check_username: '',
             check_password: '',
             members: member,
-            error : {
-              username: '',
-              password: ''
-            }
+            error : false,
           },
           methods:{
             check_login(){
@@ -80,8 +77,7 @@
                     location.replace("./index.html");
               }
               else{
-                this.error.username = 'กรุณากรอกชื่อผู้ใช้งานให้ถูกต้อง'
-                this.error.password = 'กรุณากรอกรหัสผ่านให้ถูกต้อง'
+                this.error = true
               }
 
               
