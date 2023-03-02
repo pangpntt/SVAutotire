@@ -330,7 +330,7 @@
                             <td >{{product.PRODUCT_ID}}</td>
                             <td>{{product.PRODUCT_NAME}}</td>
                             <td>{{product.PRODUCT_TYPE}}</td>
-                            <td><img id="img_index" alt="product_img" :src="product.PRODUCT_IMAGE"></td>
+                            <td><img id="img_in_table" alt="product_img" :src="product.PRODUCT_IMAGE"></td>
                             <td>{{product.PRODUCT_MANNER}}</td>
                             <td>{{product.PRODUCT_VERSION}}</td>
                             <td>{{product.PRODUCT_SIZE}}</td>
@@ -409,7 +409,8 @@
                 edit_index: null,
             },methods:{
                 add_product(){
-                    this.purchase.push({PRODUCT_ID: this.add.id, 
+                    this.purchase.push({
+                        PRODUCT_ID: this.add.id, 
                         PRODUCT_NAME: this.add.name, 
                         PRODUCT_MANNER: this.add.manner,
                         PRODUCT_VERSION: this.add.version,
