@@ -143,8 +143,18 @@
                                         <input v-model="add.date" class="input" type="date" />
                                     </div>
                                     <div class="column">
+<<<<<<< HEAD
                                         <label>ที่เก็บ</label>
-                                        <input class="input" type="text" />
+                                        <input v-model="add.warehouse" class="input" type="text" />
+=======
+                                        <label>ที่เก็บ</label><br>
+                                            <div class="select">
+                                                <select class="select" >
+                                                    <option>ล้อ</option>
+                                                    <option>ยาง</option>
+                                                </select>
+                                            </div>
+>>>>>>> 3016195e2cfef62a3f0ef22fb051cc11a2488501
                                     </div>
                                 </div>
                                 <div class="columns">
@@ -253,8 +263,12 @@
                                 </div>
                                 <div class="columns">
                                     <div class="column">
-                                        <label>ที่เก็บ</label>
-                                        <input class="input" type="text"/>
+                                        <label>ที่เก็บ</label><br>
+                                            <div class="select">
+                                                <select v-model="edit.warehouse"   class="select" >
+                                                    <option v-for="warehouse in warehouses" >{{warehouse}}</option>
+                                                </select>
+                                            </div>
                                     </div>
                                 </div>
                                 <div class="columns">
@@ -349,7 +363,7 @@
         </div>
     </div>
 
-
+    <script src="./data/warehouse.js"></script>
     <script src="./data/product.js"></script>
     <script>
         var app = new Vue({
@@ -359,6 +373,7 @@
                 isActive: false,
                 classArray: ['modal'],
                 classArray2: ['modal'],
+                warehouses: warehouse,
                 add:{
                     id: null,
                     name: null,

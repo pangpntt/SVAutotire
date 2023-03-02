@@ -1,0 +1,1 @@
+const warehouse = JSON.parse(`["H3", "T2", "G3", "B4", "H2"]`)
