@@ -62,7 +62,7 @@
         </div>
 
 
-        <div class="column is-11"  id="app">
+        <div class="column is-11" id="app">
             <section class="mb-5">
                 <h1 class="has-text-weight-semibold is-size-3 mt-5 mb-5">การนำเข้าสินค้า</h1>
                 <div class="block">
@@ -85,7 +85,7 @@
                                 <div class="columns">
                                     <div class="column">
                                         <label>รหัสสินค้า</label>
-                                        <input v-model="add.id"  class="input" />
+                                        <input v-model="add.id" class="input" />
                                     </div>
                                     <div class="column">
                                         <label>รูปสินค้า</label>
@@ -100,7 +100,7 @@
                                     <div class="column">
                                         <label>ประเภทสินค้า</label><br>
                                         <div class="select">
-                                            <select  v-model="add.type" class="select">
+                                            <select v-model="add.type" class="select">
                                                 <option value="ล้อ">ล้อ</option>
                                                 <option value="ยาง">ยาง</option>
                                             </select>
@@ -110,7 +110,7 @@
                                 <div class="columns">
                                     <div class="column">
                                         <label>ยี่ห้อ</label>
-                                        <input  v-model="add.brand" class="input" />
+                                        <input v-model="add.brand" class="input" />
                                     </div>
                                     <div class="column">
                                         <label>รุ่น</label>
@@ -134,7 +134,7 @@
                                     </div>
                                     <div class="column">
                                         <label>ปี</label>
-                                        <input v-model="add.year" class="input" type="number"/>
+                                        <input v-model="add.year" class="input" type="number" />
                                     </div>
                                 </div>
                                 <div class="columns">
@@ -143,18 +143,12 @@
                                         <input v-model="add.date" class="input" type="date" />
                                     </div>
                                     <div class="column">
-<<<<<<< HEAD
-                                        <label>ที่เก็บ</label>
-                                        <input v-model="add.warehouse" class="input" type="text" />
-=======
                                         <label>ที่เก็บ</label><br>
-                                            <div class="select">
-                                                <select class="select" >
-                                                    <option>ล้อ</option>
-                                                    <option>ยาง</option>
-                                                </select>
-                                            </div>
->>>>>>> 3016195e2cfef62a3f0ef22fb051cc11a2488501
+                                        <div class="select">
+                                            <select v-model="add.warehouse" class="select">
+                                                <option v-for="warehouse in warehouses">{{warehouse}}</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="columns">
@@ -169,7 +163,8 @@
                                 </div>
                                 <div class="field is-grouped">
                                     <div class="control">
-                                        <button class="button is-link" @click="add_product()">Submit</button>
+                                        <button class="button is-link"
+                                            @click="add_product(), classArray2.pop()">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -213,22 +208,22 @@
                                 <div class="columns">
                                     <div class="column">
                                         <label>รหัสสินค้า</label>
-                                        <input v-model="edit.id" class="input"/>
+                                        <input v-model="edit.id" class="input" />
                                     </div>
                                 </div>
                                 <div class="columns">
                                     <div class="column">
                                         <label>ชื่อสินค้า</label>
-                                        <input  v-model="edit.name" class= "input"/>
+                                        <input v-model="edit.name" class="input" />
                                     </div>
                                     <div class="column">
                                         <label>ประเภทสินค้า</label><br>
-                                            <div class="select">
-                                                <select v-model="edit.type" class="select" >
-                                                    <option value="ล้อ">ล้อ</option>
-                                                    <option value="ยางรถ">ยาง</option>
-                                                </select>
-                                            </div>
+                                        <div class="select">
+                                            <select v-model="edit.type" class="select">
+                                                <option value="ล้อ">ล้อ</option>
+                                                <option value="ยางรถ">ยาง</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="columns">
@@ -244,42 +239,43 @@
                                 <div class="columns">
                                     <div class="column">
                                         <label>ขนาด</label>
-                                        <input v-model="edit.size" class="input" type="text"/>
+                                        <input v-model="edit.size" class="input" type="text" />
                                     </div>
                                     <div class="column">
                                         <label>บริษัท</label>
-                                        <input v-model="edit.brand" class="input" type="text"/>
+                                        <input v-model="edit.brand" class="input" type="text" />
                                     </div>
                                 </div>
                                 <div class="columns">
                                     <div class="column">
                                         <label>สัปดาห์</label>
-                                        <input v-model="edit.week" class="input" type="number"/>
+                                        <input v-model="edit.week" class="input" type="number" />
                                     </div>
                                     <div class="column">
                                         <label>ปี</label>
-                                        <input v-model="edit.year"  class="input" type="number"/>
+                                        <input v-model="edit.year" class="input" type="number" />
                                     </div>
                                 </div>
                                 <div class="columns">
                                     <div class="column">
                                         <label>ที่เก็บ</label><br>
-                                            <div class="select">
-                                                <select v-model="edit.warehouse"   class="select" >
-                                                    <option v-for="warehouse in warehouses" >{{warehouse}}</option>
-                                                </select>
-                                            </div>
+                                        <div class="select">
+                                            <select v-model="edit.warehouse" class="select">
+                                                <option v-for="warehouse in warehouses">{{warehouse}}</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="columns">
                                     <div class="column">
                                         <label>จำนวนที่แก้ไข</label>
-                                        <input v-model="edit.amount" class="input" type="number"/>
+                                        <input v-model="edit.amount" class="input" type="number" />
                                     </div>
                                 </div>
                                 <div class="field is-grouped">
                                     <div class="control">
-                                        <button class="button is-link" @click="update_product(), classArray.pop()">Submit</button>
+                                        <button class="button is-link"
+                                            @click="update_product(), classArray.pop()">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -291,17 +287,19 @@
                     <span class="icon">
                         <i class="fa fa-search"></i>
                     </span>
-                    <input class="input" type="text" placeholder="ค้นหาชื่อสินค้า" style="width: 200px; height: 40px;">
+                    <input class="input" v-model="search_name" type="text" placeholder="ค้นหาชื่อสินค้า"
+                        style="width: 200px; height: 40px;">
 
                     <span class="icon">
                         <i class="fa fa-search"></i>
                     </span>
-                    <input class="input" type="text" placeholder="ค้นหาบริษัท" style="width: 200px; height: 40px;">
+                    <input class="input" v-model="search_manner" type="text" placeholder="ค้นหาบริษัท"
+                        style="width: 200px; height: 40px;">
 
                     <span class="icon">
                         <i class="fa fa-search"></i>
                     </span>
-                    <input class="input" type="date" placeholder="ค้นหาวันที่นำเข้าสินค้า"
+                    <input class="input" v-model="search_date" type="date" placeholder="ค้นหาวันที่นำเข้าสินค้า"
                         style="width: 200px; height: 40px;">
                 </div>
                 <!-- ตารางแสดงข้อมูล -->
@@ -326,8 +324,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="has-text-centered" v-for="(product, index) in purchase">
-                            <td >{{product.PRODUCT_ID}}</td>
+                        <tr class="has-text-centered" v-for="(product, index) in purchase_table">
+                            <td>{{product.PRODUCT_ID}}</td>
                             <td>{{product.PRODUCT_NAME}}</td>
                             <td>{{product.PRODUCT_TYPE}}</td>
                             <td><img id="img_in_table" alt="product_img" :src="product.PRODUCT_IMAGE"></td>
@@ -374,7 +372,7 @@
                 classArray: ['modal'],
                 classArray2: ['modal'],
                 warehouses: warehouse,
-                add:{
+                add: {
                     id: null,
                     name: null,
                     type: null,
@@ -388,9 +386,9 @@
                     date: null,
                     warehouse: null,
                     price: null,
-                    amount: null, 
+                    amount: null,
                 },
-                edit:{
+                edit: {
                     id: null,
                     name: null,
                     type: null,
@@ -402,50 +400,70 @@
                     week: null,
                     year: null,
                     warehouse: null,
-                    amount: null, 
+                    amount: null,
                 },
                 purchase: product,
                 del_index: null,
                 edit_index: null,
-            },methods:{
-                add_product(){
+                search_name: '',
+                search_manner: '',
+                search_date: '',
+                purchase_table: product
+
+            }, methods: {
+                add_product() {
+                    let add = this.add
                     this.purchase.push({
-                        PRODUCT_ID: this.add.id, 
-                        PRODUCT_NAME: this.add.name, 
-                        PRODUCT_MANNER: this.add.manner,
-                        PRODUCT_VERSION: this.add.version,
-                        PRODUCT_IMAGE: this.add.img,
-                        PRODUCT_SIZE: this.add.size,
-                        PRODUCT_WEEK: this.add.week,
-                        PRODUCT_TYPE: this.add.type,
-                        PRODUCT_YEAR: this.add.year,
-                        PRODUCT_PRICE: this.add.price,
-                        PRODUCT_AMOUNT: this.add.amount,
-                        WARE_HOUSE_ID: this.add.warehouse,
-                        PRODUCT_DATE: this.add.date,
-                        PURCHASE_PRICE: this.add.price,
-                        PURCHASE_BRAND: this.add.brand
+                        PRODUCT_ID: add.id,
+                        PRODUCT_NAME: add.name,
+                        PRODUCT_MANNER: add.manner,
+                        PRODUCT_VERSION: add.version,
+                        PRODUCT_IMAGE: add.img,
+                        PRODUCT_SIZE: add.size,
+                        PRODUCT_WEEK: add.week,
+                        PRODUCT_TYPE: add.type,
+                        PRODUCT_YEAR: add.year,
+                        PRODUCT_PRICE: add.price,
+                        PRODUCT_AMOUNT: add.amount,
+                        WARE_HOUSE_ID: add.warehouse,
+                        PRODUCT_DATE: add.date,
+                        PURCHASE_PRICE: add.price,
+                        PURCHASE_BRAND: add.brand
                     })
+                    add.id = ''
+                    add.name = ''
+                    add.manner = ''
+                    add.version = ''
+                    add.size = ''
+                    add.week = ''
+                    add.type = ''
+                    add.year = ''
+                    add.amount = ''
+                    add.warehouse = ''
+                    add.date = ''
+                    add.price = ''
+                    add.brand = ''
                 },
-                del_product(){
+                del_product() {
                     this.purchase.splice(this.del_index, 1)
                     this.isActive = false
                 },
-                edit_product(index){
+                edit_product(index) {
                     this.edit_index = index
-                    this.edit.id = this.purchase[this.edit_index].PRODUCT_ID
-                    this.edit.name = this.purchase[this.edit_index].PRODUCT_NAME
-                    this.edit.type = this.purchase[this.edit_index].PRODUCT_TYPE
-                    this.edit.brand = this.purchase[this.edit_index].PURCHASE_BRAND
-                    this.edit.version = this.purchase[this.edit_index].PRODUCT_VERSION
-                    this.edit.size = this.purchase[this.edit_index].PRODUCT_SIZE
-                    this.edit.manner= this.purchase[this.edit_index].PRODUCT_MANNER
-                    this.edit.year = this.purchase[this.edit_index].PRODUCT_YEAR
-                    this.edit.warehouse = this.purchase[this.edit_index].WARE_HOUSE_ID
-                    this.edit.amount = this.purchase[this.edit_index].PRODUCT_AMOUNT
-                    this.edit.week = this.purchase[this.edit_index].PRODUCT_WEEK
+                    let input = this.purchase[this.edit_index]
+                    this.edit.id = input.PRODUCT_ID
+                    this.edit.name = input.PRODUCT_NAME
+                    this.edit.type = input.PRODUCT_TYPE
+                    this.edit.brand = input.PURCHASE_BRAND
+                    this.edit.version = input.PRODUCT_VERSION
+                    this.edit.size = input.PRODUCT_SIZE
+                    this.edit.manner = input.PRODUCT_MANNER
+                    this.edit.year = input.PRODUCT_YEAR
+                    this.edit.warehouse = input.WARE_HOUSE_ID
+                    this.edit.amount = input.PRODUCT_AMOUNT
+                    this.edit.week = input.PRODUCT_WEEK
                 },
-                update_product(){
+                update_product() {
                     this.purchase[this.edit_index].PRODUCT_ID = this.edit.id
                     this.purchase[this.edit_index].PRODUCT_NAME = this.edit.name
                     this.purchase[this.edit_index].PRODUCT_TYPE = this.edit.type
@@ -458,9 +476,30 @@
                     this.purchase[this.edit_index].PRODUCT_AMOUNT = this.edit.amount
                     this.purchase[this.edit_index].PRODUCT_WEEK = this.edit.week
                 }
+            }, watch: {
+                search_name: function (new_search) {
+                    this.purchase_table = this.purchase.filter(puds => {
+                        return puds.PRODUCT_NAME.toLowerCase().includes(new_search.toLowerCase())
+                    })
+                    this.search_manner = ''
+                    this.search_date = ''
 
+                },
+                search_manner: function (new_search) {
+                    this.purchase_table = this.purchase.filter(puds => {
+                        return puds.PURCHASE_BRAND.toLowerCase().includes(new_search.toLowerCase())
+                    })
+                    this.search_name = ''
+                    this.search_date = ''
+                }, search_date: function (new_search) {
+                    this.purchase_table = this.purchase.filter(puds => {
+                        return puds.PRODUCT_DATE.toLowerCase().includes(new_search.toLowerCase())
+                    })
+                    this.search_name = ''
+                    this.search_manner = ''
+                },
             }
-            
+
         })
     </script>
 </body>

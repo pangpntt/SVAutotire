@@ -27,7 +27,7 @@ const product = JSON.parse(`[{
     "PRODUCT_PRICE": "240000",
     "PRODUCT_AMOUNT": "3",
     "WARE_HOUSE_ID": "B4",
-    "PRODUCT_DATE": "13-02-2022",
+    "PRODUCT_DATE": "2021-05-03",
     "PURCHASE_PRICE": "125000",
     "PURCHASE_BRAND": "VOSSEN TH"
 },{
@@ -38,12 +38,12 @@ const product = JSON.parse(`[{
     "PRODUCT_IMAGE": "./data/img_product/PILOT_SPORT_EV.jpg",
     "PRODUCT_SIZE": "20",
     "PRODUCT_WEEK": "35",
-    "PRODUCT_TYPE": "ยางรถ",
+    "PRODUCT_TYPE": "ยาง",
     "PRODUCT_YEAR": "2023",
     "PRODUCT_PRICE": "21400",
     "PRODUCT_AMOUNT": "19",
     "WARE_HOUSE_ID": "B4",
-    "PRODUCT_DATE": "25-12-2021",
+    "PRODUCT_DATE": "2021-05-05",
     "PURCHASE_PRICE": "10000",
     "PURCHASE_BRAND": "MICHELIN"
     

@@ -70,7 +70,7 @@
                     <span class="icon">
                         <i class="fa fa-search"></i>
                     </span>
-                    <input class="input" type="text" placeholder="ค้นหาชื่อลูกค้า" style="width: 200px; height: 40px;">
+                    <input v-model="input_cus" class="input" type="text" placeholder="ค้นหาชื่อลูกค้า" style="width: 200px; height: 40px;">
                 </div>
                 <!-- ตารางแสดงข้อมูลลูกค้า -->
                 <table class="table is-bordered is-striped is-hoverable is-fullwidth mt-5">
@@ -84,7 +84,7 @@
                         </tr>
                     </thead>
                     <tbody class="has-text-centered">
-                        <tr v-for="(customer, index) in customers">
+                        <tr v-for="(customer, index) in search_cus">
                             <td>{{customer.CUSTOMER_FIRSTNAME}}</td>
                             <td>{{customer.CUSTOMER_LASTNAME}}</td>
                             <td>{{customer.CUSTOMER_NUMBER}}</td>
@@ -153,6 +153,8 @@
                     number: null,
                     mileage: null
                 },
+                search_cus: customer,
+                input_cus: '',
                 edit_index: null,
             },methods:{
                 edit_cus(index){
@@ -169,6 +171,14 @@
                     this.customers[edit_index].CUSTOMER_NUMBER = this.edit.number
                     this.customers[edit_index].CUSTOMER_MILEAGE = this.edit.mileage
                     this.classArray.pop()
+                }
+            },watch:{
+                input_cus: function(new_search){
+                    this.search_cus = this.customers.filter(customer=>{
+                        return customer.CUSTOMER_FIRSTNAME.toLowerCase().includes(new_search.toLowerCase()) || 
+                            customer.CUSTOMER_LASTNAME.toLowerCase().includes(new_search.toLowerCase()) || 
+                            (customer.CUSTOMER_FIRSTNAME+" "+customer.CUSTOMER_LASTNAME).toLowerCase().includes(new_search.toLowerCase())
+                    })
                 }
             }
             

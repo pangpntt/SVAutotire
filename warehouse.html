@@ -78,7 +78,7 @@
                     <span class="icon">
                         <i class="fa fa-search"></i>
                     </span>
-                    <input class="input" type="text" placeholder="ค้นหาคลังสินค้า" style="width: 200px; height: 40px;">
+                    <input class="input" v-model="input_warehouse" type="text" placeholder="ค้นหาคลังสินค้า" style="width: 200px; height: 40px;">
                 </div>
                 <!-- ตารางแสดงข้อมูลคลังสินค้า -->
                 <table class="table is-bordered is-striped is-hoverable is-fullwidth mt-5 has-text-centered">
@@ -88,7 +88,7 @@
                             <th colspan="2"></th>
                         </tr>
                     </thead>
-                    <tbody v-for="(warehouse, index) in warehouses">
+                    <tbody v-for="(warehouse, index) in warehouse_table">
                         <td>{{warehouse}}</td>
 
                         <td class="has-text-centered">
@@ -211,12 +211,20 @@
                 classArray2: ['modal'],
                 warehouses: warehouse,
                 add: null,
+                input_warehouse: '',
+                warehouse_table: warehouse,
             },
             methods:{
                 add_warehouse(){
                     this.warehouses.push(this.add)
                     this.add = null
                     this.classArray2.pop()
+                }
+            },watch:{
+                input_warehouse: function(new_search){
+                    this.warehouse_table = this.warehouses.filter(warehouse=>{
+                        return warehouse.toLowerCase().includes(new_search.toLowerCase())
+                    })
                 }
             }
         })

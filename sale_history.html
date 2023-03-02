@@ -133,9 +133,12 @@
                                         <label>รายชื่อลูกค้าเก่า</label><br>
                                         <div class="select">
                                             <select class="select" >
-                                                <option v-for="customer in customers">
-                                                    <div v-model="add_sale_history.cus_old">{{customer.CUSTOMER_FIRSTNAME}} {{customer.CUSTOMER_LASTNAME}}</div>
-                                                </option>
+                                                <div v-model="cus.old">
+                                                    <option v-for="customer in customers">
+                                                        <div>{{customer.CUSTOMER_FIRSTNAME}} {{customer.CUSTOMER_LASTNAME}}</div>
+                                                    </option>
+                                                </div>
+
                                             </select>
                                         </div>
                                     </div>
@@ -151,11 +154,11 @@
                                 <div class="columns" v-show="add_sale_history.status_cus === 'new'">
                                     <div class="column">
                                         <label>ชื่อ</label>
-                                        <input v-model="add_sale_history.cus.new_fname" class="input" />
+                                        <input v-model="cus.new_fname" class="input" />
                                     </div>
                                     <div class="column">
                                         <label>นามสกุล</label>
-                                        <input v-model="add_sale_history.cus.new_lname" class="input" />
+                                        <input v-model="cus.new_lname" class="input" />
                                     </div>
                                 </div>
                                 <div class="columns" v-show="add_sale_history.status_cus === 'new'" >
@@ -182,17 +185,17 @@
                     <span class="icon">
                         <i class="fa fa-search"></i>
                     </span>
-                    <input class="input" type="text" placeholder="ค้นหาชื่อสินค้า" style="width: 200px; height: 40px;">
+                    <input v-model="search_name" class="input" type="text" placeholder="ค้นหาชื่อสินค้า" style="width: 200px; height: 40px;">
 
                     <span class="icon">
                         <i class="fa fa-search"></i>
                     </span>
-                    <input class="input" type="text" placeholder="ค้นหาชื่อลูกค้า" style="width: 200px; height: 40px;">
+                    <input class="input" v-model="search_cus" type="text" placeholder="ค้นหาชื่อลูกค้า" style="width: 200px; height: 40px;">
 
                     <span class="icon">
                         <i class="fa fa-search"></i>
                     </span>
-                    <input class="input" type="date" placeholder="ค้นหาวันที่ขาย" style="width: 200px; height: 40px;">
+                    <input class="input" v-model="search_date" type="date" placeholder="ค้นหาวันที่ขาย" style="width: 200px; height: 40px;">
                 </div>
                 <!-- ตารางแสดงข้อมูล -->
                 <table class="table is-bordered is-striped is-hoverable is-fullwidth mt-5">
@@ -210,7 +213,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(sale_history,index) in sale_histories" class="has-text-centered">
+                        <tr v-for="(sale_history,index) in search_sale_history" class="has-text-centered">
                             <td>{{sale_history.PRODUCT_ID}}</td>
                             <td>{{sale_history.PRODUCT_NAME}}</td>
                             <td><img alt="รูปสินค้า" id="img_in_table" :src="sale_history.PRODUCT_IMAGE"></td>
@@ -240,51 +243,87 @@
                     name: null,
                     img: null,
                     type: null,
-                    cus: {
-                        old: null,
-                        new_fname: null,
-                        new_lname: null
-                    },
                     emp: null,
                     date: null,
                     price: null,
                     amount: null,
                     status_cus: null
-                }
+                },
+                cus: {
+                        old: '',
+                        new_fname: '',
+                        new_lname: ''
+                },
+                    search_name: '',
+                    search_cus: '',
+                    search_date: '',
+                    search_sale_history: sale_history,
             },
             methods:{
                 add_sale_table(){
+                    let sale_history = this.add_sale_history
                     if(this.status_cus === 'new'){
                         this.sale_histories.push({
-                            SALE_HISTORY_DATE: this.add_sale_history.date,
-                            SALE_HISTORY_PRICE: this.add_sale_history.price,
-                            SALE_HISTORY_AMOUNT: this.add_sale_history.amount,
-                            EMPLOYEE_NAME: this.add_sale_history.emp,
-                            PRODUCT_NAME: this.add_sale_history.name,
-                            PRODUCT_ID:  this.add_sale_history.id,
-                            PRODUCT_TYPE: this.add_sale_history.type,
-                            CUSTOMER_NAME: this.add_sale_history.cus.new_fname+ " "+ this.add_sale_history.cus.new_lname
+                            SALE_HISTORY_DATE: sale_history.date,
+                            SALE_HISTORY_PRICE: sale_history.price,
+                            SALE_HISTORY_AMOUNT: sale_history.amount,
+                            EMPLOYEE_NAME: sale_history.emp,
+                            PRODUCT_NAME: sale_history.name,
+                            PRODUCT_ID:  sale_history.id,
+                            PRODUCT_TYPE: sale_history.type,
+                            CUSTOMER_NAME: sale_history.cus.new_fname+ " "+ sale_history.cus.new_lname
                         })
                     }else{
                         this.sale_histories.push({
-                            SALE_HISTORY_DATE: this.add_sale_history.date,
-                            SALE_HISTORY_PRICE: this.add_sale_history.price,
-                            SALE_HISTORY_AMOUNT: this.add_sale_history.amount,
-                            EMPLOYEE_NAME: this.add_sale_history.emp,
-                            PRODUCT_NAME: this.add_sale_history.name,
-                            PRODUCT_ID:  this.add_sale_history.id,
-                            PRODUCT_TYPE: this.add_sale_history.type,
-                            CUSTOMER_NAME: this.add_sale_history.cus.old
+                            SALE_HISTORY_DATE: sale_history.date,
+                            SALE_HISTORY_PRICE: sale_history.price,
+                            SALE_HISTORY_AMOUNT: sale_history.amount,
+                            EMPLOYEE_NAME: sale_history.emp,
+                            PRODUCT_NAME: sale_history.name,
+                            PRODUCT_ID:  sale_history.id,
+                            PRODUCT_TYPE: sale_history.type,
+                            CUSTOMER_NAME: sale_history.cus.old
                         })
                     }
                     this.classArray.pop()
+                    sale_history.date = null
+                    sale_history.price = null
+                    sale_history.amount = null
+                    sale_history.name = null
+                    sale_history.id = null
+                    sale_history.type = null
+                    sale_history.cus.old = null
+                    sale_history.cus.new_fname = null
+                    sale_history.cus.new_lname = null
+                    this.search_sale_history = this.sale_histories
+
                 }
             },created(){
                     let name = localStorage.getItem('username');
                     this.add_sale_history.emp = name
-
-
+            },watch:{
+                search_name: function(new_SALE_HISTORY){
+                    this.search_sale_history = this.sale_histories.filter(SALE_HISTORY => {
+                        return SALE_HISTORY.PRODUCT_NAME.toLowerCase().includes(new_SALE_HISTORY.toLowerCase())
+                    })
+                    search_cus = ''
+                    search_date = ''
+                },
+                search_cus:function(new_SALE_HISTORY){
+                    this.search_sale_history = this.sale_histories.filter(SALE_HISTORY => {
+                        return SALE_HISTORY.CUSTOMER_NAME.toLowerCase().includes(new_SALE_HISTORY.toLowerCase())
+                    })
+                    search_name = ''
+                    search_date = ''
+                },
+                search_date:function(new_SALE_HISTORY){
+                    this.search_sale_history = this.sale_histories.filter(SALE_HISTORY => {
+                        return SALE_HISTORY.SALE_HISTORY_DATE.toLowerCase().includes(new_SALE_HISTORY.toLowerCase())
+                    })
+                    search_name = ''
+                    search_cus = ''
                 }
+            }
         })
     </script>
 </body>
