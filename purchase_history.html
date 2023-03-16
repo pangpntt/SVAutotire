@@ -51,6 +51,14 @@
                             <span class="title">คลังสินค้า</span>
                         </a>
                     </li>
+                    
+                    <li>
+                        <a href="register.html">
+                            <span class="icon"><i class="fa-solid fa-registered"></i></span>
+                            <span class="title">ลงทะเบียน</span>
+                            
+                        </a>
+                    </li>
                     <li>
                         <a href="login.html">
                             <span class="icon"><i class="fa-solid fa-right-from-bracket"></i></span>
@@ -328,7 +336,7 @@
                             <td>{{product.PRODUCT_ID}}</td>
                             <td>{{product.PRODUCT_NAME}}</td>
                             <td>{{product.PRODUCT_TYPE}}</td>
-                            <td><img id="img_in_table" alt="product_img" :src="product.PRODUCT_IMAGE"></td>
+                            <td class="image is-128x128"><img id="img_in_table" alt="product_img" :src="product.PRODUCT_IMAGE"></td>
                             <td>{{product.PRODUCT_MANNER}}</td>
                             <td>{{product.PRODUCT_VERSION}}</td>
                             <td>{{product.PRODUCT_SIZE}}</td>
@@ -443,9 +451,12 @@
                     add.date = ''
                     add.price = ''
                     add.brand = ''
+                    this.purchase_table = this.purchase
                 },
                 del_product() {
+                
                     this.purchase.splice(this.del_index, 1)
+                    this.purchase_table = this.purchase
                     this.isActive = false
                 },
                 edit_product(index) {

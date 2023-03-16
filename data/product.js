@@ -11,7 +11,7 @@ const product = JSON.parse(`[{
     "PRODUCT_PRICE": "190000",
     "PRODUCT_AMOUNT": "5",
     "WARE_HOUSE_ID": "H2",
-    "PRODUCT_DATE": "02-13-2022",
+    "PRODUCT_DATE": "2022-12-02",
     "PURCHASE_PRICE": "100000",
     "PURCHASE_BRAND": "VOSSEN TH"
 },{

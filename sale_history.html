@@ -51,6 +51,14 @@
                             <span class="title">คลังสินค้า</span>
                         </a>
                     </li>
+                    
+                    <li>
+                        <a href="register.html">
+                            <span class="icon"><i class="fa-solid fa-registered"></i></span>
+                            <span class="title">ลงทะเบียน</span>
+                            
+                        </a>
+                    </li>
                     <li>
                         <a href="login.html">
                             <span class="icon"><i class="fa-solid fa-right-from-bracket"></i></span>
@@ -216,7 +224,7 @@
                         <tr v-for="(sale_history,index) in search_sale_history" class="has-text-centered">
                             <td>{{sale_history.PRODUCT_ID}}</td>
                             <td>{{sale_history.PRODUCT_NAME}}</td>
-                            <td><img alt="รูปสินค้า" id="img_in_table" :src="sale_history.PRODUCT_IMAGE"></td>
+                            <td><img id='img_in_table' alt="product_img" :src="sale_history.PRODUCT_IMAGE"></td>
                             <td>{{sale_history.PRODUCT_TYPE}}</td>
                             <td>{{sale_history.CUSTOMER_NAME}}</td>
                             <td>{{sale_history.EMPLOYEE_NAME}}</td>
@@ -262,7 +270,7 @@
             methods:{
                 add_sale_table(){
                     let sale_history = this.add_sale_history
-                    if(this.status_cus === 'new'){
+                    // if(this.status_cus === 'new'){
                         this.sale_histories.push({
                             SALE_HISTORY_DATE: sale_history.date,
                             SALE_HISTORY_PRICE: sale_history.price,
@@ -271,20 +279,22 @@
                             PRODUCT_NAME: sale_history.name,
                             PRODUCT_ID:  sale_history.id,
                             PRODUCT_TYPE: sale_history.type,
-                            CUSTOMER_NAME: sale_history.cus.new_fname+ " "+ sale_history.cus.new_lname
+                            CUSTOMER_NAME: "captain"
+                            // CUSTOMER_NAME: sale_history.cus.new_fname+ " "+ sale_history.cus.new_lname
                         })
-                    }else{
-                        this.sale_histories.push({
-                            SALE_HISTORY_DATE: sale_history.date,
-                            SALE_HISTORY_PRICE: sale_history.price,
-                            SALE_HISTORY_AMOUNT: sale_history.amount,
-                            EMPLOYEE_NAME: sale_history.emp,
-                            PRODUCT_NAME: sale_history.name,
-                            PRODUCT_ID:  sale_history.id,
-                            PRODUCT_TYPE: sale_history.type,
-                            CUSTOMER_NAME: sale_history.cus.old
-                        })
-                    }
+                    // }else{
+                    //     this.sale_histories.push({
+                    //         SALE_HISTORY_DATE: sale_history.date,
+                    //         SALE_HISTORY_PRICE: sale_history.price,
+                    //         SALE_HISTORY_AMOUNT: sale_history.amount,
+                    //         EMPLOYEE_NAME: sale_history.emp,
+                    //         PRODUCT_NAME: sale_history.name,
+                    //         PRODUCT_ID:  sale_history.id,
+                    //         PRODUCT_TYPE: sale_history.type,
+                    //         CUSTOMER_NAME: sale_history.cus.old
+                    //     })
+                    // }
+                    this.search_sale_history = this.sale_histories
                     this.classArray.pop()
                     sale_history.date = null
                     sale_history.price = null
@@ -295,7 +305,7 @@
                     sale_history.cus.old = null
                     sale_history.cus.new_fname = null
                     sale_history.cus.new_lname = null
-                    this.search_sale_history = this.sale_histories
+                    
 
                 }
             },created(){

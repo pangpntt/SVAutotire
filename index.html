@@ -52,6 +52,14 @@
                             <span class="title">คลังสินค้า</span>
                         </a>
                     </li>
+                    
+                    <li>
+                        <a href="register.html">
+                            <span class="icon"><i class="fa-solid fa-registered"></i></span>
+                            <span class="title">ลงทะเบียน</span>
+                            
+                        </a>
+                    </li>
                     <li>
                         <a href="login.html">
                             <span class="icon"><i class="fa-solid fa-right-from-bracket"></i></span>
@@ -108,7 +116,6 @@
                         <th class="has-text-centered">ปี</th>
                         <th class="has-text-centered">ที่เก็บ</th>
                         <th class="has-text-centered">จำนวน</th>
-                        <th colspan="3"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -124,33 +131,20 @@
                         <td>{{product.PRODUCT_YEAR}}</td>
                         <td>{{product.WARE_HOUSE_ID}}</td>
                         <td>{{product.PRODUCT_AMOUNT}}</td>
-                        <td class="has-text-centered">
-                            <span class="icon" style="color: red;">
-                                <i class="fas fa-trash"></i>
-                            </span>
-                        </td>
-                        <td class="has-text-centered">
-                            <span class="icon">
-                                <i class="fas fa-pen"></i>
-                            </span>
-                        </td>
-                        <td class="has-text-centered">
-                            <span class="icon">
-                                <i class="fa-solid fa-basket-shopping"></i>
-                            </span>
-
-                        </td>
                     </tr>
                 </tbody>
             </table>
 
         </div>
+        
     </div>
     <script src="./data/product.js"></script>
     <script>
         var app = new Vue({
             el: '#app',
             data: {
+                modal: true,
+                isActive: false,
                 classArray: ['modal'],
                 products: product,
                 serach_product: product,
@@ -158,6 +152,11 @@
                 name: '',
                 year: '',
                 type: '',
+            },
+            methods: {
+                logout(){
+                    localStorage.removeItem('username')
+                }
             },
 
             watch: {

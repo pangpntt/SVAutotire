@@ -121,5 +121,14 @@ body {
     
 }
 #img_in_table{
-    width: 150px;
+    width: 128px;
+    height: 128px;
+    /* transition: transform .2s; */
 }
+
+/* #img_in_table:hover{
+    -ms-transform: scale(1.5); /* IE 9 */
+    /* -webkit-transform: scale(1.5); /* Safari 3-8 */
+     /* transform: scale(3); 
+} */ 
+
