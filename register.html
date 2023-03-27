@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+    <script src="navbar.js"></script>
+</head>
+
+<body>
+
+    <section class="hero is-light is-bold is-fullheight" id="app">
+        <div class="hero-body">
+            <div class="container ">
+                <div class="columns is-centered ">
+                    <div class="has-background-white is-5-mobile is-5-tablet is-4-desktop is-4-widescreen box">
+                        <div class="title has-text-centered mt-4">
+                            <h1>
+                                SVAutotire Sale & Service
+                            </h1>
+                        </div>
+                        <div class="subtitle mt-4">
+                            <form method="get" class="">
+
+                                <div class="field ">
+                                    <label class="label">ชื่อ</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="กรอกชื่อผู้ใช้งาน"
+                                            v-model="check_username">
+
+                                    </div>
+                                </div>
+
+                                <div class="field ">
+                                    <label class="label">นามสกุล</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="กรอกชื่อผู้ใช้งาน"
+                                            v-model="check_username">
+
+                                    </div>
+                                </div>
+
+                                <div class="field ">
+                                    <label class="label">username</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="กรอกชื่อผู้ใช้งาน"
+                                            v-model="check_username">
+
+                                    </div>
+                                </div>
+
+                                <div class="field mt-5">
+                                    <label class="label">password</label>
+                                    <div class="control">
+                                        <input class="input" type="password" placeholder="กรอกรหัสผ่าน"
+                                            v-model="check_password">
+
+                                    </div>
+                                </div>
+
+                                <div class="field mt-5">
+                                    <label class="label">confirm password</label>
+                                    <div class="control">
+                                        <input class="input" type="password" placeholder="กรอกรหัสผ่าน"
+                                            v-model="check_password">
+
+                                    </div>
+                                </div>
+
+                                <div class="field mt-5">
+                                    <label>ตำแหน่ง</label><br>
+                                    <div class="select">
+                                        <select  class="select">
+                                            <option value="employee">พนักงาน</option>
+                                            <option value="manager">ผู้จัดการ</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <div class="control has-text-centered">
+                                        <a href="index.html" class="button is-info mb-4 mt-4 " >ลงทะเบียน</a>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- script -->
+    <script src="./data/employee.js"></script>
+
+
+</body>
+
+
+</html>

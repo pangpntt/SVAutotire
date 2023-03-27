@@ -73,32 +73,10 @@
             <h1 class="has-text-weight-semibold is-size-3 mt-5 mb-5">สินค้าในสต็อก</h1>
             <!-- ปุ่ม search -->
             <div class="control has-icons-left">
-                <div class="select">
-                    <select v-model="type">
-                        <option>ทั้งหมด</option>
-                        <option>ล้อ</option>
-                        <option>ยาง</option>
-                    </select>
-                </div>
-                <span class="icon is-left">
-                    <i class="fa fa-search"></i>
-                </span>
                 <span class="icon">
-                    <i class="fa fa-search"></i>
+                    <i class="fa fa-search" style="z-index: 1;"></i>
                 </span>
-                <input class="input" v-model="id" type="text" placeholder="ค้นหารหัสสินค้า"
-                    style="width: 200px; height: 40px;">
-
-                <span class="icon">
-                    <i class="fa fa-search"></i>
-                </span>
-                <input class="input" v-model="name" type="text" placeholder="ค้นหาชื่อสินค้า"
-                    style="width: 200px; height: 40px;">
-
-                <span class="icon">
-                    <i class="fa fa-search"></i>
-                </span>
-                <input class="input" v-model="year" type="number" placeholder="ค้นหาปีของสินค้า"
+                <input class="input" v-model="search" type="text" placeholder="ค้นหา" @input="search"
                     style="width: 200px; height: 40px;">
             </div>
             <!-- ตารางแสดงสินค้า -->
@@ -135,6 +113,7 @@
                 </tbody>
             </table>
 
+
         </div>
         
     </div>
@@ -146,52 +125,15 @@
                 modal: true,
                 isActive: false,
                 classArray: ['modal'],
-                products: product,
                 serach_product: product,
-                id: '',
-                name: '',
-                year: '',
-                type: '',
+                search: '',
             },
             methods: {
                 logout(){
                     localStorage.removeItem('username')
-                }
-            },
-
-            watch: {
-                id: function (new_search) {
-                    this.serach_product = this.products.filter(product => {
-                        return product.PRODUCT_ID.toLowerCase().includes(new_search.toLowerCase())
-                    })
-                    this.name = ''
-                    this.year = ''
-                    this.type = ''
                 },
-                name: function (new_search) {
-                    this.serach_product = this.products.filter(product => {
-                        return product.PRODUCT_NAME.toLowerCase().includes(new_search.toLowerCase())
-                    })
-                    this.id = ''
-                    this.year = ''
-                    this.type = ''
-                },
-                year: function (new_search) {
-                    this.serach_product = this.products.filter(product => {
-                        return product.PRODUCT_YEAR.toLowerCase().includes(new_search.toLowerCase())
-                    })
-                    this.name = ''
-                    this.id = ''
-                    this.type = ''
-                },
-                type: function (new_search) {
-                    if (new_search === 'ทั้งหมด') {
-                        this.serach_product = this.products
-                    } else {
-                        this.serach_product = this.products.filter(product => {
-                            return product.PRODUCT_TYPE.toLowerCase().includes(new_search.toLowerCase())
-                        })
-                    }
+                search(){
+                    
                 }
             },
         })

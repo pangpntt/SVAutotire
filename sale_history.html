@@ -179,6 +179,12 @@
                                         <input class="input" />
                                     </div>
                                 </div>
+                                <div class="columns">
+                                    <div class="column">
+                                        <label>หมายเหตุ</label>
+                                        <textarea class="textarea"></textarea>
+                                    </div>
+                                </div>
                                 <div class="field is-grouped">
                                     <div class="control">
                                         <button class="button is-link" @click="add_sale_table()">Submit</button>
@@ -193,17 +199,7 @@
                     <span class="icon">
                         <i class="fa fa-search"></i>
                     </span>
-                    <input v-model="search_name" class="input" type="text" placeholder="ค้นหาชื่อสินค้า" style="width: 200px; height: 40px;">
-
-                    <span class="icon">
-                        <i class="fa fa-search"></i>
-                    </span>
-                    <input class="input" v-model="search_cus" type="text" placeholder="ค้นหาชื่อลูกค้า" style="width: 200px; height: 40px;">
-
-                    <span class="icon">
-                        <i class="fa fa-search"></i>
-                    </span>
-                    <input class="input" v-model="search_date" type="date" placeholder="ค้นหาวันที่ขาย" style="width: 200px; height: 40px;">
+                    <input v-model="search_name" class="input" type="text" placeholder="ค้นหา" style="width: 200px; height: 40px;">
                 </div>
                 <!-- ตารางแสดงข้อมูล -->
                 <table class="table is-bordered is-striped is-hoverable is-fullwidth mt-5">

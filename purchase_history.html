@@ -169,6 +169,12 @@
                                         <input v-model="add.amount" class="input" type="number" />
                                     </div>
                                 </div>
+                                <div class="columns">
+                                    <div class="column">
+                                        <label>หมายเหตุ</label>
+                                        <textarea class="textarea"></textarea>
+                                    </div>
+                                </div>
                                 <div class="field is-grouped">
                                     <div class="control">
                                         <button class="button is-link"
@@ -280,6 +286,12 @@
                                         <input v-model="edit.amount" class="input" type="number" />
                                     </div>
                                 </div>
+                                <div class="columns">
+                                    <div class="column">
+                                        <label>หมายเหตุ</label>
+                                        <textarea class="textarea"></textarea>
+                                    </div>
+                                </div>
                                 <div class="field is-grouped">
                                     <div class="control">
                                         <button class="button is-link"
@@ -295,20 +307,10 @@
                     <span class="icon">
                         <i class="fa fa-search"></i>
                     </span>
-                    <input class="input" v-model="search_name" type="text" placeholder="ค้นหาชื่อสินค้า"
+                    <input class="input" v-model="search_name" type="text" placeholder="ค้นหา"
                         style="width: 200px; height: 40px;">
 
-                    <span class="icon">
-                        <i class="fa fa-search"></i>
-                    </span>
-                    <input class="input" v-model="search_manner" type="text" placeholder="ค้นหาบริษัท"
-                        style="width: 200px; height: 40px;">
-
-                    <span class="icon">
-                        <i class="fa fa-search"></i>
-                    </span>
-                    <input class="input" v-model="search_date" type="date" placeholder="ค้นหาวันที่นำเข้าสินค้า"
-                        style="width: 200px; height: 40px;">
+                    
                 </div>
                 <!-- ตารางแสดงข้อมูล -->
                 <table class="table is-bordered is-striped is-hoverable is-fullwidth mt-5">
