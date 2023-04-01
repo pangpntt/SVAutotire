@@ -1,0 +1,24 @@
+{
+  "name": "project_webpro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scrips.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pangpntt/project_webpro.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pangpntt/project_webpro/issues"
+  },
+  "homepage": "https://github.com/pangpntt/project_webpro#readme",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mysql2": "^3.2.0"
+  }
+}
