@@ -25,7 +25,13 @@
                     <li>
                         <a href="index.html">
                             <span class="icon"><i class="fa-solid fa-store"></i></i></span>
-                            <span class="title">สินค้าในสต็อก</span>
+                            <span class="title">ล้อ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tire.html">
+                            <span class="icon"><i class="fa-solid fa-store"></i></i></span>
+                            <span class="title">ยาง</span>
                         </a>
                     </li>
                     <li>
@@ -70,7 +76,7 @@
             </div>
         </div>
         <div class="column is-11">
-            <h1 class="has-text-weight-semibold is-size-3 mt-5 mb-5">สินค้าในสต็อก</h1>
+            <h1 class="has-text-weight-semibold is-size-3 mt-5 mb-5">ล้อ</h1>
             <!-- ปุ่ม search -->
             <div class="control has-icons-left">
                 <span class="icon">
@@ -83,32 +89,41 @@
             <table class="table is-bordered is-striped is-hoverable is-fullwidth mt-5">
                 <thead>
                     <tr>
-                        <th class="has-text-centered">รหัสสินค้า</th>
-                        <th class="has-text-centered">ประเภทสินค้า</th>
-                        <th class="has-text-centered">ชื่อสินค้า</th>
-                        <th class="has-text-centered">รูปสินค้า</th>
-                        <th class="has-text-centered">ยี่ห้อ</th>
-                        <th class="has-text-centered">รุ่น</th>
-                        <th class="has-text-centered">ขนาด</th>
-                        <th class="has-text-centered">สัปดาห์</th>
-                        <th class="has-text-centered">ปี</th>
-                        <th class="has-text-centered">ที่เก็บ</th>
-                        <th class="has-text-centered">จำนวน</th>
+                        <th rowspan="2" class="has-text-centered">รูปสินค้า</th>
+                        <th rowspan="2" class="has-text-centered">บริษัท</th>
+                        <th rowspan="2" class="has-text-centered">MODEL</th>
+                        <th rowspan="2" class="has-text-centered">SIZE</th>
+                        <th rowspan="2" class="has-text-centered">รู (PCD)</th>
+                        <th rowspan="2" class="has-text-centered">ET</th>
+                        <th rowspan="2" class="has-text-centered">CB</th>
+                        <th rowspan="2" class="has-text-centered">สี</th>
+                        <th colspan="3" class="has-text-centered">จำนวน</th>
+                        <th rowspan="2" class="has-text-centered">TOTAL</th>
+                        <th rowspan="2" class="has-text-centered">ที่เก็บ</th>
+                        <th rowspan="2" class="has-text-centered">ราคาขาย</th>
+                    </tr>
+                    <tr>
+                        <th class="has-text-centered">SV</th>
+                        <th class="has-text-centered">โชว์</th>
+                        <th class="has-text-centered">TN</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="(product, index) in serach_product" class="has-text-centered">
-                        <td>{{product.PRODUCT_ID}}</td>
-                        <td>{{product.PRODUCT_TYPE}}</td>
-                        <td>{{product.PRODUCT_NAME}}</td>
                         <td><img id="img_in_table" alt="product_img" :src="product.PRODUCT_IMAGE"></td>
-                        <td>{{product.PRODUCT_MANNER}}</td>
-                        <td>{{product.PRODUCT_VERSION}}</td>
+                        <td>{{product.PRODUCT_COMPANY}}</td>
+                        <td>{{product.PRODUCT_NAME}}</td>
                         <td>{{product.PRODUCT_SIZE}}</td>
-                        <td>{{product.PRODUCT_WEEK}}</td>
-                        <td>{{product.PRODUCT_YEAR}}</td>
-                        <td>{{product.WARE_HOUSE_ID}}</td>
+                        <td>{{product.PRODUCT_PCD}}</td>
+                        <td>{{product.PRODUCT_ET}}</td>
+                        <td>{{product.PRODUCT_CB}}</td>
+                        <td>{{product.PRODUCT_COLOR}}</td>
+                        <td>{{product.PRODUCT_SV}}</td>
+                        <td>{{product.PRODUCT_SHOW}}</td>
+                        <td>{{product.PRODUCT_TN}}</td>
                         <td>{{product.PRODUCT_AMOUNT}}</td>
+                        <td>{{product.WARE_HOUSE_ID}}</td>
+                        <td>{{product.PRODUCT_PRICE}}</td>
                     </tr>
                 </tbody>
             </table>
