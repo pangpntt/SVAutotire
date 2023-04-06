@@ -30,7 +30,7 @@
                                 <div class="field ">
                                     <label class="label">ชื่อ</label>
                                     <div class="control">
-                                        <input class="input" type="text" placeholder="กรอกชื่อผู้ใช้งาน" name="fname"
+                                        <input class="input" type="text" value="<%= (locals.old_data) ? old_data.fname: '' %>" placeholder="กรอกชื่อผู้ใช้งาน" name="fname"
                                             v-model="check_username">
 
                                     </div>
@@ -39,7 +39,7 @@
                                 <div class="field ">
                                     <label class="label">นามสกุล</label>
                                     <div class="control">
-                                        <input class="input" type="text" placeholder="กรอกชื่อผู้ใช้งาน" name="lname"
+                                        <input class="input" type="text" value="<%= (locals.old_data) ? old_data.lname: '' %>" placeholder="กรอกชื่อผู้ใช้งาน" name="lname"
                                             v-model="check_username">
 
                                     </div>
@@ -48,7 +48,7 @@
                                 <div class="field ">
                                     <label class="label">username</label>
                                     <div class="control">
-                                        <input class="input" type="text" placeholder="กรอกชื่อผู้ใช้งาน" name="username"
+                                        <input class="input" type="text" value="<%= (locals.old_data) ? old_data.username: '' %>" placeholder="กรอกชื่อผู้ใช้งาน" name="username"
                                             v-model="check_username">
 
                                     </div>
@@ -57,7 +57,7 @@
                                 <div class="field mt-5">
                                     <label class="label">password</label>
                                     <div class="control">
-                                        <input class="input" type="password" placeholder="กรอกรหัสผ่าน" name="password"
+                                        <input class="input" type="password"  placeholder="กรอกรหัสผ่าน" name="password"
                                             v-model="check_password">
 
                                     </div>
@@ -75,13 +75,17 @@
                                 <div class="field mt-5">
                                     <label>ตำแหน่ง</label><br>
                                     <div class="select">
-                                        <select  class="select" name="role"> 
+                                        <select  class="select" value="<%= (locals.old_data) ? old_data.role: '' %>" name="role"> 
                                             <option value="employee">พนักงาน</option>
                                             <option value="manager">ผู้จัดการ</option>
                                         </select>
                                     </div>
                                 </div>
-
+                                <% if(locals.register_error){
+                                    register_error.forEach(function(error_msg){%>
+                                        <div><%= error_msg %></div>
+                                    <%})
+                                } %>
                                 <div class="field">
                                     <div class="control has-text-centered">
                                         <button type="submit" class="button is-info mb-4 mt-4" >ลงทะเบียน</button>
