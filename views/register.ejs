@@ -81,16 +81,18 @@
                                         </select>
                                     </div>
                                 </div>
-                                <% if(locals.register_error){
-                                    register_error.forEach(function(error_msg){%>
+
+                                <% if(locals.message){
+                                    message.forEach(function(error_msg){%>
                                         <div><%= error_msg %></div>
-                                    <%})
-                                } %>
+                                        <% });
+                                    } %>
                                 <div class="field">
                                     <div class="control has-text-centered">
                                         <button type="submit" class="button is-info mb-4 mt-4" >ลงทะเบียน</button>
                                     </div>
                                 </div>
+
                             </form>
                         </div>
                     </div>

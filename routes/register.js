@@ -1,7 +1,6 @@
 
 const express = require("express");
 const pool = require("../config");
-
 const bcrypt = require('bcrypt');
 router = express.Router();
 const { body, validationResult } = require('express-validator');
@@ -12,12 +11,11 @@ router.get("/register", async function(req, res, next){
 
 
 router.post("/register/", [
-    body('username').custom(value =>{
+    body('username', 'Invalid email address').trim().not().isEmpty().custom(value =>{
         return pool.query('SELECT EMP_USERNAME FROM sys.Employees WHERE EMP_USERNAME = ?', [value])
         .then(([rows]) =>{
             if(rows.length > 0){
                 return Promise.reject('Username นี้มีอยู่แล้วในระบบ')
-
             }
             return true;
         })
@@ -34,9 +32,11 @@ router.post("/register/", [
             let hashPassword = await bcrypt.hash(password, 8)
             await pool.query(
                 "INSERT INTO sys.Employees (EMP_USERNAME,EMP_PASSWORD, EMP_FNAME, EMP_LNAME, EMP_ROLE) VALUES( ?, ?, ?, ?, ?)",
-                [fname, lname, username, hashPassword, role]
+                [username, hashPassword, fname, lname, role]
             )
-
+            res.render('register',{
+                message: ['success']
+            });
         }catch (err){
             throw err;
         }
@@ -46,7 +46,7 @@ router.post("/register/", [
         })
 
         res.render('register', {
-            register_error: allErrors,
+            message: allErrors,
             old_data:req.body
         })
     }
