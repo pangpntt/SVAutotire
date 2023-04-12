@@ -45,7 +45,7 @@
 
                   <div class="field">
                     <div class="control has-text-centered" >
-                      <a class="button is-info mb-4 mt-4 " @click="check_login()">เข้าสู่ระบบ</a>
+                      <button type="submit" class="button is-info mb-4 mt-4" >เข้าสู่ระบบ</button>
                     </div>
                   </div>
                   
@@ -68,26 +68,6 @@
             check_password: '',
             members: member,
             role: '',
-            error : false,
-          },
-          methods:{
-            check_login(){
-              let name = this.members.filter(member =>{
-                  return member.emp_username == this.check_username && member.emp_password == this.check_password
-                })
-               
-              if(name.length != 0){
-                    localStorage.setItem('username', name[0].emp_username)
-                    localStorage.setItem('role', name[0].role)
-                    location.replace("./index.html");
-                    
-              }
-              else{
-                this.error = true
-              }
-
-              
-            }
           },
         })
     </script>

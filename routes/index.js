@@ -1,8 +1,18 @@
 const express = require("express")
 const pool = require("../config")
-router = express.Router();
 
-router.get("/", async function(req, res, next){
-    res.render('index')
+
+const ifNotLogin = (req, res, next) =>{
+    if(!req.session.isLogin){
+        return res.redirect('/login')
+    }
+}
+
+
+
+
+router.get("/", ifNotLogin, async function(req, res, next){
+
+    res.render('login')
 })
 exports.router = router;
