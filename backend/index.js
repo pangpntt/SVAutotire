@@ -3,6 +3,9 @@ const path = require("path")
 const bodyParser = require('body-parser')
 const cookieSession = require('cookie-session');
 const app = express();
+var cors = require('cors')
+
+app.use(cors())
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
@@ -25,7 +28,7 @@ app.use(login.router)
 
 
 
-app.listen(8080, ()=>{
-    console.log('Start at 8080')
+app.listen(3000, ()=>{
+    console.log('Start at 3000')
 })
 
