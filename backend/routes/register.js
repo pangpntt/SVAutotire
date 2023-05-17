@@ -3,8 +3,7 @@ const pool = require("../config");
 const bcrypt = require('bcrypt');
 const Joi = require('joi')
 router = express.Router();
-const {generateToken} = require("../utils/token");
-const { header } = require("express-validator");
+
 
 
 const usernameValidator = async (value, hepler)=>{
@@ -37,7 +36,7 @@ const signupSchema = Joi.object({
 
 router.post("/register/", async function(req, res, next){
     try{
-        register = await signupSchema.validateAsync(req.body, {abortEarly: true})
+        register = await signupSchema.validateAsync(req.body, {abortEarly: false})
     }catch(err){
         return res.status(400).send(err)
     }
