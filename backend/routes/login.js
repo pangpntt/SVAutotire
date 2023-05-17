@@ -1,6 +1,7 @@
 const express = require("express")
 const pool = require("../config")
 const bcrypt = require('bcrypt');
+
 router = express.Router();
 const { body, validationResult } = require('express-validator');
 
