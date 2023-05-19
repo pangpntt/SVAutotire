@@ -14,6 +14,6 @@ const pool = require("../config")
 // router.get("/", ifNotLogin, async function(req, res, next){
     router.get("/",  async function(req, res, next){
 
-    res.render('index')
+    
 })
 exports.router = router;

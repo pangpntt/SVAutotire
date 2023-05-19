@@ -1,57 +1,52 @@
-
 const express = require("express");
 const pool = require("../config");
 const bcrypt = require('bcrypt');
+const Joi = require('joi')
 router = express.Router();
-const { body, validationResult } = require('express-validator');
-
-router.get("/register", async function(req, res, next){
-    res.render('register')
-});
 
 
-router.post("/register/", [
-    body('username', 'Invalid email address').trim().not().isEmpty().custom(value =>{
-        return pool.query('SELECT EMP_USERNAME FROM sys.Employees WHERE EMP_USERNAME = ?', [value])
-        .then(([rows]) =>{
-            if(rows.length > 0){
-                return Promise.reject('Username นี้มีอยู่แล้วในระบบ')
-            }
-            return true;
-        })
-    })
-],async function(req, res, next){
-    const validation_result = validationResult(req);
-    const fname = req.body.fname;
-    const lname = req.body.lname;
-    const username = req.body.username;
-    const password = req.body.password;
-    const role = req.body.role;
-    if(validation_result.isEmpty()){
-        try{
-            let hashPassword = await bcrypt.hash(password, 8)
-            await pool.query(
-                "INSERT INTO sys.Employees (EMP_USERNAME,EMP_PASSWORD, EMP_FNAME, EMP_LNAME, EMP_ROLE) VALUES( ?, ?, ?, ?, ?)",
-                [username, hashPassword, fname, lname, role]
-            )
-            res.render('register',{
-                message: ['success']
-            });
-        }catch (err){
-            throw err;
-        }
-    }else{
-        let allErrors = validation_result.errors.map((error) =>{
-            return error.msg
-        })
 
-        res.render('register', {
-            message: allErrors,
-            old_data:req.body
-        })
+const usernameValidator = async (value, hepler)=>{
+    const [rows, filed] = await pool.query("SELECT EMP_USERNAME FROM sys.Employees WHERE EMP_USERNAME=?", [value])
+    if(rows.length >0){
+        const message = "ชื่อผู้ใช้งานนี้มีคนใช้ไปแล้ว"
+        throw new Joi.ValidationError(message, {message})
     }
-    
+    return value
+}
+const roleValidator = (value, header)=>{
+    console.log(value.localeCompare('Employee') != 0 || value.localeCompare('Manager') != 0)
+    if(value  === 'Employee' || value === 'Manager'){
+        return value
+    }
+    else{
+        const message = "กรุณากรอกRoleให้ถูกต้อง"
+        throw new Joi.ValidationError(message, {message})
+    }
 
+}
+
+const signupSchema = Joi.object({
+    username: Joi.string().required().min(5).max(20).external(usernameValidator).pattern(/^[A-Za-z0-9]+$/),
+    password: Joi.string().required().pattern(/^[A-Za-z0-9]+$/).min(4).max(20),
+    firstname: Joi.string().pattern(/^[\u0E00-\u0E7F]+$/).required(),
+    lastname: Joi.string().pattern(/^[\u0E00-\u0E7F]+$/).required(),
+    role: Joi.string().pattern(/^[A-Za-z]+$/).required().custom(roleValidator)
+})
+
+router.post("/register/", async function(req, res, next){
+    try{
+        register = await signupSchema.validateAsync(req.body, {abortEarly: false})
+    }catch(err){
+        return res.status(400).send(err)
+    }
+    try{
+        password = await bcrypt.hash(register.password, 5)
+        await pool.query("INSERT INTO sys.Employees(EMP_USERNAME, EMP_PASSWORD, EMP_FNAME, EMP_LNAME, EMP_ROLE) VALUE(?, ?, ?, ?, ?)", [register.username, password, register.firstname, register.lastname, register.role])
+        return res.status(200).json("SUCCESS")
+    }catch(err){
+        res.status(400).json(err.toString());
+    }
 })
 
 exports.router = router;

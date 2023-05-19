@@ -16,7 +16,7 @@
                   <div class="field ">
                     <label class="label">ชื่อผู้ใช้งาน</label>
                     <div class="control">
-                      <input class="input" type="text" placeholder="กรอกชื่อผู้ใช้งาน" v-model="check_username">
+                      <input class="input" type="text" placeholder="กรอกชื่อผู้ใช้งาน" v-model="username">
                       <span v-if="error === true" class="has-text-danger">กรุณากรอกชื่อผู้ใช้งานให้ถูกต้อง</span>
                     </div>
                   </div>
@@ -35,8 +35,6 @@
                       <a class="button is-info mb-4 mt-4 " @click="check_login()">เข้าสู่ระบบ</a>
                     </div>
                   </div>
-                  
-
                 </form>
               </div>
             </div>
@@ -50,18 +48,26 @@
 </template>
 <script>
   import axios from "axios";
+
+
     export default {
     data() {
         return {
-          check_username: '',
-          check_password: ''
+          username: '',
+          password: '',
+          error: false,
         }
       },
       methods:{
-        test(){
+        login(){
+          const data ={
+            username: this.username,
+            password: this.password
+          }
           axios
-          .get("http://localhost:3000/login")
-        }
+          .get("http://localhost:3000/login", data)
+        },
+        
 
 
       }
