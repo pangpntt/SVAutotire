@@ -1,16 +1,20 @@
-const express = require("express")
-const path = require("path")
-const bodyParser = require('body-parser')
-var cors = require('cors')
+require ('dotenv').config()
+const express = require("express");
+const path = require("path");
+// const bodyParser = require('body-parser');
+const  cors = require('cors');
 const app = express();
-
+// const routerToken = express.Router()
+const {API_PORT} = process.env;
 app.use(cors())
 
-app.set('views', path.join(__dirname, 'views'))
+// app.set('views', path.join(__dirname, 'views'))
 app.use(express.static(path.join(__dirname, 'public')))
-app.use(bodyParser.urlencoded({ extended: true}));
+// app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.json()) 
 app.use(express.urlencoded({ extended: true })) 
+
+
 
 
 const register = require('./routes/register')
@@ -23,7 +27,7 @@ app.use(login.router)
 
 
 
-app.listen(3000, ()=>{
-    console.log('Start at 3000')
+app.listen(API_PORT, ()=>{
+    console.log(`Start at port ${API_PORT}`)
 })
 

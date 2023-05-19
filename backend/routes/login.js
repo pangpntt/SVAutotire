@@ -2,8 +2,8 @@ const express = require("express")
 const pool = require("../config")
 const bcrypt = require('bcrypt');
 const Joi = require("joi");
-const moment = require('moment');
-const { v4: uuidv4 } = require('uuid');
+const jwt = require("jsonwebtoken")
+
 router = express.Router();
 
 const loginSchema = Joi.object({
@@ -22,7 +22,7 @@ router.post("/login", async function (req, res, next) {
     const connect = await pool.getConnection()
     await connect.beginTransaction()
     try {
-        const [user, filed] = await connect.query("SELECT * FROM sys.Employees WHERE EMP_USERNAME=?", [login.username])
+        const [user, filed] = await connect.query("SELECT *, (EMP_FNAME+ ' '+ EMP_LNAME) AS EMP_FULLNAME FROM sys.Employees WHERE EMP_USERNAME=?", [login.username])
         if (!user[0]) {
             return res.status(400).send("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง")
         }
@@ -31,29 +31,41 @@ router.post("/login", async function (req, res, next) {
             return res.status(400).send("รหัสผ่านไม่ถูกต้อง")
         }
 
-        const [tokens, filed2] = await connect.query("SELECT * FROM sys.Token WHERE user_id=?", [user[0].EMP_ID])
-        try {
-            newToken = uuidv4();
-            const createAt = moment().format('YYYY-MM-DD HH:mm:ss')
-            const expiredAt = moment().add(1, 'minute').format('YYYY-MM-DD HH:mm:ss');
-            if (!tokens[0]) {
-                await connect.query('INSERT INTO sys.Token(user_id, token, created, expired) VALUE(?, ?, ?, ?)', [user[0].EMP_ID, newToken, createAt, expiredAt])
+        // createToken
+        const token = jwt.sign({
+            name: user[0].EMP_FULLNAME,
+            role: user[0].EMP_ROLE,
+        }, process.env.TOKEN_KEY,
+            {
+                expiresIn: "24h"
             }
-            else if (tokens[0].expired < new Date()) {
-                await connect.query('UPDATE sys.Token SET created=?, expired=? WHERE id=?', [createAt, expiredAt, tokens[0].id])
-            }
-            connect.commit();
-            return res.status(200).send("Success")
-        }
-        catch (err) {
-            connect.rollback();
-            throw err;
-        } finally {
-            connect.release();
-        }
+
+        )
+        res.status(201).json(token)
+        // const [tokens, filed2] = await connect.query("SELECT * FROM sys.Token WHERE user_id=?", [user[0].EMP_ID])
+        // try {
+        //     newToken = uuidv4();
+        //     const createAt = moment().format('YYYY-MM-DD HH:mm:ss')
+        //     const expiredAt = moment().add(1, 'minute').format('YYYY-MM-DD HH:mm:ss');
+        //     if (!tokens[0]) {
+        //         await connect.query('INSERT INTO sys.Token(user_id, token, created, expired) VALUE(?, ?, ?, ?)', [user[0].EMP_ID, newToken, createAt, expiredAt])
+        //     }
+        //     else if (tokens[0].expired < new Date()) {
+        //         await connect.query('UPDATE sys.Token SET created=?, expired=? WHERE id=?', [createAt, expiredAt, tokens[0].id])
+        //     }
+        //     connect.commit();
+        //     return res.status(200).send("Success")
+        // }
+        // catch (err) {
+
+        //     throw err;
+
 
     } catch (err) {
+        connect.rollback();
         console.log(err)
+    } finally {
+        connect.release();
     }
 });
 

@@ -49,8 +49,6 @@
 </template>
 <script>
   import axios from "axios";
-
-
     export default {
     data() {
         return {
@@ -67,6 +65,13 @@
           }
           axios
           .get("http://localhost:3000/login", data)
+          .then((res)=>{
+            console.log(res)
+            alert('success');
+          }).catch((err)=>{
+            console.log(err)
+            this.error = true
+          })
         },
         
 
