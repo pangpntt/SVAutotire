@@ -16,17 +16,26 @@
                   <div class="field ">
                     <label class="label">ชื่อผู้ใช้งาน</label>
                     <div class="control">
-                      <input class="input" type="text" placeholder="กรอกชื่อผู้ใช้งาน" v-model="username">
-                      <span v-if="error === true" class="has-text-danger">กรุณากรอกชื่อผู้ใช้งานให้ถูกต้อง</span>
+                      <input class="input" type="text" placeholder="กรอกชื่อผู้ใช้งาน" v-model="$v.username.$model" :class="{'is-danger': $v.username.$error}">
                     </div>
+                    <template v-if="$v.username.$error">
+                      <p class="help is-danger" v-if="!$v.username.required">ชื่อผู้ใช้งาน จำเป็นต้องกรอก</p>
+                      <p class="help is-danger" v-if="!$v.username.minLength">ชื่อผู้ใช้งาน ต้องมีขนาดอย่างน้อย 5 ตัวอักษร</p>
+                      <p class="help is-danger" v-if="!$v.username.maxLength">ชื่อผู้ใช้งาน มีขนาดได้มากสุด 20 ตัวอักษร</p>
+                    </template>
                   </div>
 
                   <div class="field mt-5">
                     <label class="label">รหัสผ่าน</label>
                     <div class="control">
-                      <input class="input" type="password" placeholder="กรอกรหัสผ่าน" v-model="check_password">
-                      <span v-if="error === true" class="has-text-danger">กรุณากรอกรหัสผ่านให้ถูกต้อง</span>
+                      <input class="input" type="password" placeholder="กรอกรหัสผ่าน" v-model="$v.password.$model" :class="{'is-danger': $v.password.$error}">
                     </div>
+                    <template v-if="$v.password.$error">
+                      <p class="help is-danger" v-if="!$v.password.required">password จำเป็นต้องกรอก</p>
+                      <p class="help is-danger" v-if="!$v.password.minLength">password ต้องมีขนาดอย่างน้อย 4 ตัวอักษร</p>
+                      <p class="help is-danger" v-if="!$v.password.maxLength">password มีขนาดได้มากสุด 20 ตัวอักษร</p>
+                      <p class="help is-danger" v-if="!$v.password.complex">password ต้องประกอบด้วย A-Z, a-z, 0-9</p>
+                    </template>
                   </div>
 
                   <div class="field">
@@ -48,16 +57,34 @@
 </template>
 <script>
   import axios from "axios";
+  import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 
+  function complexPassword (value) {
+        if (!(value.match(/[a-z]/) && value.match(/[A-Z]/) && value.match(/[0-9]/))) {
+        return false
+    }
+    return true
+    }
 
     export default {
     data() {
         return {
           username: '',
-          password: '',
-          error: false,
+          password: ''
         }
       },
+      validations: {
+        username: {
+            required: required, 
+            minLength: minLength(5),
+            maxLength: maxLength(20),
+        },
+        password: {
+            required: required, 
+            minLength: minLength(4),
+            maxLength: maxLength(20),
+            complex: complexPassword
+        },
       methods:{
         login(){
           const data ={
@@ -71,5 +98,5 @@
 
 
       }
-}
+}}
 </script>
