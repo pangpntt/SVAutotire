@@ -74,58 +74,88 @@
           </div>
         </div>
         <div class="column is-9">
-          <h1 class="has-text-weight-semibold is-size-3 mt-5 mb-5">ยาง</h1>
-              <!-- ปุ่ม search -->
-              <div class="control has-icons-left">
-                  <span class="icon">
-                    <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
-                  </span>
-                  <input class="input" v-model="search" type="text" placeholder="ค้นหา" @input="search"
-                      style="width: 200px; height: 40px;">
-              </div>
-              <!-- ตารางแสดงสินค้า -->
-              <table class="table is-bordered is-striped is-hoverable is-fullwidth mt-5">
-                  <thead>
-                      <tr>
-                          <th rowspan="2" class="has-text-centered">รูปสินค้า</th>
-                          <th rowspan="2" class="has-text-centered">บริษัท</th>
-                          <th rowspan="2" class="has-text-centered">MODEL</th>
-                          <th rowspan="2" class="has-text-centered">SIZE</th>
-                          <th rowspan="2" class="has-text-centered">รู (PCD)</th>
-                          <th rowspan="2" class="has-text-centered">ET</th>
-                          <th rowspan="2" class="has-text-centered">CB</th>
-                          <th rowspan="2" class="has-text-centered">สี</th>
-                          <th colspan="3" class="has-text-centered">จำนวน</th>
-                          <th rowspan="2" class="has-text-centered">TOTAL</th>
-                          <th rowspan="2" class="has-text-centered">ที่เก็บ</th>
-                          <th rowspan="2" class="has-text-centered">ราคาขาย</th>
-                      </tr>
-                      <tr>
-                          <th class="has-text-centered">SV</th>
-                          <th class="has-text-centered">โชว์</th>
-                          <th class="has-text-centered">TN</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr class="has-text-centered">
-                          <td><img id="img_in_table" alt="product_img"></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                      </tr>
-                  </tbody>
-              </table>
-  
+            <h1 class="has-text-weight-semibold is-size-3 mt-5 mb-5">ข้อมูลลูกค้า</h1>
+                <!-- ค้นหา -->
+                <div class="control has-icons-left">
+                    <span class="icon">
+                        <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
+                    </span>
+                    <input v-model="input_cus" class="input" type="text" placeholder="ค้นหาชื่อลูกค้า" style="width: 200px; height: 40px;">
+                </div>
+                <!-- ตารางแสดงข้อมูลลูกค้า -->
+                <table class="table is-bordered is-striped is-hoverable is-fullwidth mt-5">
+                    <thead>
+                        <tr>
+                            <th class="has-text-centered">ชื่อ</th>
+                            <th class="has-text-centered">นามสกุล</th>
+                            <th class="has-text-centered">ป้ายทะเบียนรถ</th>
+                            <th class="has-text-centered">จำนวนไมล์รถ</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="has-text-centered">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="has-text-centered">
+                                <a @click="classArray.push('is-active')">
+                                    <span class="icon">
+                                        <font-awesome-icon :icon="['fas', 'pen']" />
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- modal -->
+                <div id="modal3" :class="classArray">
+        <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head px-5 py-3">
+                    <p class="modal-card-title">แก้ไขข้อมูลลูกค้า</p>
+                    <button class="delete" aria-label="close" @click="classArray.pop()"></button>
+                </header>
+            <section class="modal-card-body px-5 py-3">
+                <div class="content">
+                    <div class="columns">
+                        <div class="column pr-4">
+                            <label>ชื่อ</label>
+                            <input class="input" />
+                        </div>
+                        <div class="column pr-4">
+                            <label>นามสกุล</label>
+                            <input class="input" />
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column pr-4">
+                            <label>ป้ายทะเบียนรถ</label>
+                            <input  class="input" />
+                        </div>
+                        <div class="column">
+                            <label>จำนวนไมล์รถ</label>
+                            <input class="input" type="number" />
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column">
+                            <label>หมายเหตุ</label>
+                            <textarea class="textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button class="button is-link px-4"
+                                @click="update_product(), classArray.pop()">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        </div>
+
         </div>
       </div>
     </section>
@@ -135,7 +165,9 @@
   export default {
     name: "HeaderView",
     data() {
-      return {};
+      return {
+        classArray: ['modal'],
+      };
     },
   };
   </script>

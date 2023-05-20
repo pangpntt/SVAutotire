@@ -83,7 +83,156 @@
                         <p>เพิ่มข้อมูลการขายเข้าสินค้า</p>
                     </a>
                 </div>
-            
+                <!-- modal -->
+                <div id="modal3" :class="classArray">
+                    <div class="modal-background"></div>
+                    <div class="modal-card">
+                        <header class="modal-card-head px-5 py-3">
+                            <p class="modal-card-title">ขายสินค้า</p>
+                            <button class="delete" aria-label="close" @click="classArray.pop()"></button>
+                        </header>
+                        <section class="modal-card-body px-5 py-3">
+                            <div class="content">
+                                <div class="columns">
+                                    <div class="column">
+                                        <label>รหัสสินค้า</label>
+                                        <input class="input" />
+                                    </div>
+                                </div>
+                                <div class="columns">
+                                    <div class="column pr-4">
+                                        <label>ชื่อสินค้า</label>
+                                        <input class="input" />
+                                    </div>
+                                    <div class="column">
+                                        <label>ประเภทสินค้า</label><br>
+                                        <div class="select">
+                                            <select class="select">
+                                                <option value="ล้อ">ล้อ</option>
+                                                <option value="ยาง">ยาง</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="columns">
+                                    <div class="column pr-4">
+                                        <label>พนักงานขาย</label>
+                                        <input disabled class="input" />
+                                    </div>
+                                    <div class="column">
+                                        <label>วันที่ขาย</label>
+                                        <input class="input" type="date" />
+                                    </div>
+                                </div>
+                                <div class="columns">
+                                    <div class="column pr-4">
+                                        <label>ราคาที่ขาย</label>
+                                        <input class="input" type="number" />
+                                    </div>
+                                    <div class="column">
+                                        <label>จำนวน</label>
+                                        <input class="input" type="number" />
+                                    </div>
+                                </div>
+                                <div class="columns">
+                                    <div class="column">
+                                        <label class="radio">
+                                            <input value="old" type="radio">
+                                            ลูกค้าเก่า
+                                        </label>
+                                    </div>
+                                    <div class="column">
+                                        <label>รายชื่อลูกค้าเก่า</label><br>
+                                        <div class="select">
+                                            <select class="select" >
+                                                <div>
+                                                    <option >
+                                                        <div></div>
+                                                    </option>
+                                                </div>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="columns">
+                                    <div class="column">
+                                        <label class="radio">
+                                            <input value="new" type="radio">
+                                            ลูกค้าใหม่
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="columns">
+                                    <div class="column pr-4">
+                                        <label>ชื่อ</label>
+                                        <input class="input" />
+                                    </div>
+                                    <div class="column">
+                                        <label>นามสกุล</label>
+                                        <input class="input" />
+                                    </div>
+                                </div>
+                                <div class="columns" >
+                                    <div class="column pr-4">
+                                        <label>ป้ายทะเบียนรถ</label>
+                                        <input class="input" />
+                                    </div>
+                                    <div class="column">
+                                        <label>ไมล์รถ</label>
+                                        <input class="input" />
+                                    </div>
+                                </div>
+                                <div class="columns">
+                                    <div class="column">
+                                        <label>หมายเหตุ</label>
+                                        <textarea class="textarea"></textarea>
+                                    </div>
+                                </div>
+                                <div class="field is-grouped">
+                                    <div class="control">
+                                        <button class="button is-link px-4" @click="add_sale_table()">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <!-- ค้นหา -->
+                <div class="control has-icons-left">
+                    <span class="icon"><font-awesome-icon :icon="['fas', 'magnifying-glass']" /><i class="fa fa-search"></i>
+                    </span>
+                    <input class="input" type="text" placeholder="ค้นหา" style="width: 200px; height: 40px;">
+                </div>
+                <!-- ตารางแสดงข้อมูล -->
+                <table class="table is-bordered is-striped is-hoverable is-fullwidth mt-5">
+                    <thead>
+                        <tr>
+                            <th class="has-text-centered">รหัสสินค้า</th>
+                            <th class="has-text-centered">ชื่อสินค้า</th>
+                            <th class="has-text-centered">รูปสินค้า</th>
+                            <th class="has-text-centered">ประเภทสินค้า</th>
+                            <th class="has-text-centered">ลูกค้า</th>
+                            <th class="has-text-centered">พนักงานขาย</th>
+                            <th class="has-text-centered">วันที่ขาย</th>
+                            <th class="has-text-centered">ราคาที่ขาย</th>
+                            <th class="has-text-centered">จำนวน</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><img id='img_in_table' alt="product_img"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
         </div>
       </div>
     </section>
@@ -93,7 +242,9 @@
   export default {
     name: "HeaderView",
     data() {
-      return {};
+      return {
+        classArray: ['modal'],
+      };
     },
   };
   </script>
