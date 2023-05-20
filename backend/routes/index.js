@@ -1,19 +1,19 @@
 const express = require("express")
 const pool = require("../config")
+const {verifyToken} = require('../middlewares/auth')
+const router = express.Router();
 
-
-// const ifNotLogin = (req, res, next) =>{
-//     if(!req.session.isLogin){
-//         return res.redirect('login')
-//     }
-// }
 
 
 
 
 // router.get("/", ifNotLogin, async function(req, res, next){
-    router.get("/",  async function(req, res, next){
+router.get("/", verifyToken ,async function(req, res, next){
+    try{
+        res.status(201).json("Success")
+    }catch(err){
+        console.log(err)
+    }
 
-    
 })
 exports.router = router;

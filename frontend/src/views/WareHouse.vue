@@ -227,6 +227,7 @@
   </template>
   
   <script>
+  import axios from "axios";
   export default {
     name: "HeaderView",
     data() {
@@ -234,9 +235,20 @@
         modal: true,
         isActive: false,
         classArray: ['modal'],
-        classArray2: ['modal']
+        classArray2: ['modal'],
+        warehouses: null,
       };
     },
+    created(){
+      axios.get("http://localhost:3000/")
+      .then((respones) =>{
+        this.warehouses = respones.data
+        console.log(this.warehouses)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
   };
   </script>
   

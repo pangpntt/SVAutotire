@@ -12,7 +12,6 @@
               </div>
               <div class="subtitle mt-4">
                 <form method="get" class="">
-
                   <div class="field ">
                     <label class="label">ชื่อผู้ใช้งาน</label>
                     <div class="control">
@@ -24,6 +23,7 @@
                       <p class="help is-danger" v-if="!$v.username.maxLength">ชื่อผู้ใช้งาน มีขนาดได้มากสุด 20 ตัวอักษร</p>
                     </template>
                   </div>
+                
 
                   <div class="field mt-5">
                     <label class="label">รหัสผ่าน</label>
@@ -37,23 +37,23 @@
                       <p class="help is-danger" v-if="!$v.password.complex">password ต้องประกอบด้วย A-Z, a-z, 0-9</p>
                     </template>
                   </div>
+                
 
-                  <div class="field">
-                    <div class="control has-text-centered" >
-                      <!-- <button @click="test">test</button> -->
-                      <a class="button is-info mb-4 mt-4 " @click="check_login()">เข้าสู่ระบบ</a>
-                    </div>
+                <div class="field">
+                  <div class="control has-text-centered">
+                    <!-- <button @click="test">test</button> -->
+                    <a class="button is-info mb-4 mt-4 " @click="login()">เข้าสู่ระบบ</a>
                   </div>
-                </form>
-              </div>
+                </div>
+              </form>
             </div>
           </div>
-
         </div>
+
       </div>
-    </section>
-    <!-- script -->
-   
+    </div>
+  </section>
+  <!-- script -->
 </template>
 <script>
   import axios from "axios";
@@ -92,11 +92,23 @@
             password: this.password
           }
           axios
-          .get("http://localhost:3000/login", data)
-        },
-        
+        .post("http://localhost:3000/login", data)
+        .then((res) => {
+          const token = res.data;
+          console.log(res.data)
+          localStorage.setItem("token", token)
+          // this.$emit("auth-change");
+          this.$router.push({ path: "/stock" });
+        }).catch((err) => {
+          console.log(err)
+          this.error = true
+        })
+        }
+      
+    },
 
 
-      }
-}}
+
+  }
+}
 </script>
