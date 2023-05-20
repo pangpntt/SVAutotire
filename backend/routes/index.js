@@ -9,6 +9,11 @@ const router = express.Router();
 
 // router.get("/", ifNotLogin, async function(req, res, next){
 router.get("/", verifyToken ,async function(req, res, next){
-    return res.status(201).json("Success")
+    try{
+        res.status(201).json("Success")
+    }catch(err){
+        console.log(err)
+    }
+
 })
 exports.router = router;

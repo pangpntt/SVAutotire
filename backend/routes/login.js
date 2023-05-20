@@ -13,24 +13,28 @@ const loginSchema = Joi.object({
 
 
 router.post("/login", async function (req, res, next) {
+
     try {
         var login = await loginSchema.validateAsync(req.body, { abortEarly: false })
         var password = login.password
     } catch (err) {
+        console.log(err)
         return res.status(400).send(err)
     }
     const connect = await pool.getConnection()
     await connect.beginTransaction()
     try {
         const [user, filed] = await connect.query("SELECT *, (EMP_FNAME+ ' '+ EMP_LNAME) AS EMP_FULLNAME FROM sys.Employees WHERE EMP_USERNAME=?", [login.username])
-        if (!user[0]) {
+        if (user[0]) {
+            if (!(await bcrypt.compare(password, user[0].EMP_PASSWORD))) {
+                console.log('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง')
+                return res.status(400).send("รหัสผ่านไม่ถูกต้อง")
+            }
+        }
+        else{
+            console.log('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง')
             return res.status(400).send("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง")
         }
-
-        else if (!(await bcrypt.compare(password, user[0].EMP_PASSWORD))) {
-            return res.status(400).send("รหัสผ่านไม่ถูกต้อง")
-        }
-
         // createToken
         const token = jwt.sign({
             name: user[0].EMP_FULLNAME,
@@ -39,8 +43,8 @@ router.post("/login", async function (req, res, next) {
             {
                 expiresIn: "24h"
             }
-
         )
+        console.log(token)
         res.status(201).json(token)
         // const [tokens, filed2] = await connect.query("SELECT * FROM sys.Token WHERE user_id=?", [user[0].EMP_ID])
         // try {
@@ -60,11 +64,12 @@ router.post("/login", async function (req, res, next) {
 
         //     throw err;
 
-
+        console.log('success')
     } catch (err) {
         connect.rollback();
         console.log(err)
     } finally {
+
         connect.release();
     }
 });
