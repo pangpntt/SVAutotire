@@ -44,12 +44,12 @@ const routes = [
     {
         path: '/customer',
         name: 'Register',
-        component: () => import('../views/WheelView.vue')
+        component: () => import('../views/CustomerView.vue')
     },
     {
         path: '/warehouse',
         name: 'Register',
-        component: () => import('../views/WheelView.vue')
+        component: () => import('../views/WareHouse.vue')
     },
     
 
