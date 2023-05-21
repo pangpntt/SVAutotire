@@ -14,12 +14,10 @@ const nameValidator = async(value, helper)=>{
 
 
 const warehouseSchema = Joi.object({
-    name: Joi.string().required().min(3).max(50).external(nameValidator)
-    // firstname: Joi.string().min(2).max(30).required(),
-    // lastname: Joi.string().min(2).max(30).required(),
-    // mile: Joi.number().required(),
-    // licensePlate: Joi.string().required()//.external(licensePlateValidator)
+    name: Joi.string().required().min(3).max(50).external(nameValidator),
+    note: Joi.string().required()
 })
+
 
 router.get("/warehouse", verifyToken ,async function(req, res, next){
     try{
@@ -33,11 +31,39 @@ router.get("/warehouse", verifyToken ,async function(req, res, next){
 
 
 router.post("/warehouse", verifyToken, async function(req, res, next){
+
     try{
         warehouse = await warehouseSchema.validateAsync(req.body, {abortEarly: false})
-        await pool.query("INSERT INTO sys.warehouse(warehouse_name) value(?)", [warehouse.name])
+        await pool.query("INSERT INTO sys.warehouse(warehouse_name, note) value(?, ?)", [warehouse.name, warehouse.note])
         res.status(200).json("SUCCESS")
     }catch(err){
+        return res.status(400).send(err)
+    }
+})
+
+router.delete("/warehouse/:id", verifyToken, async function(req, res, next){
+
+    number = req.params.id
+
+    try{
+        await pool.query("DELETE from sys.warehouse where warehouse_id = ?", [number])
+        res.status(200).json("SUCCESS")
+    }catch(err){
+        console.log(err)
+        return res.status(400).send(err)
+    }
+})
+
+router.put("/warehouse/edit/:id", verifyToken, async function(req, res, next){
+    number = req.params.id
+    console.log(number)
+    console.log(req.body.name)
+
+    try{
+        await pool.query("UPDATE sys.warehouse set warehouse_name = ?, note = ? WHERE warehouse_id = ?", [req.body.name,req.body.note,number])
+        res.status(200).json("SUCCESS")
+    }catch(err){
+        console.log(err)
         return res.status(400).send(err)
     }
 })

@@ -93,12 +93,12 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody class="has-text-centered">
+                    <tbody class="has-text-centered" v-for="customer in customers" :key="customer.cus_id">
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{ customer.cus_fname }}</td>
+                            <td>{{ customer.cus_lname }}</td>
+                            <td>{{ customer.license_plate }}</td>
+                            <td>{{ customer.cus_mile }}</td>
                             <td class="has-text-centered">
                                 <a @click="classArray.push('is-active')">
                                     <span class="icon">
@@ -162,13 +162,30 @@
   </template>
   
   <script>
+  import axios from "axios";
   export default {
     name: "HeaderView",
     data() {
       return {
         classArray: ['modal'],
+        customers: null,
       };
-    },
+    },created() {
+    const token = localStorage.getItem('token');
+    const config = {
+      headers: {
+        'x-access-token': token
+      }
+    }
+      axios.get("http://localhost:3000/customer", config)
+        .then((respones) => {
+          this.customers = respones.data
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+  
   };
   </script>
   

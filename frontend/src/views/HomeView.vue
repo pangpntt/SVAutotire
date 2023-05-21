@@ -128,7 +128,7 @@ export default {
   data() {
     return {};
   },
-  mounted(){
+  mounted() {
     this.fetchToken()
   },
   methods: {
@@ -136,7 +136,7 @@ export default {
       const token = localStorage.getItem('token');
       if (token) {
         const { name, role } = getUserInfoFromToken(token);
-        console.log(name+' : '+role);
+        console.log(name + ' : ' + role);
       }
     },
   },

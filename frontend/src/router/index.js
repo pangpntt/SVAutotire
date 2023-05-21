@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-
+import jwt_decode from 'jwt-decode';
 
 Vue.use(VueRouter)
 
@@ -9,16 +9,19 @@ const routes = [
     {
         path: '/',
         name: 'LoginView',
+        meta: { guess: true },
         component: () => import('../views/LoginView.vue')
     },
     {
         path: '/register',
-        name: 'Signup',
+        name: 'Register',
+        meta: { LoginView: true },
         component: () => import('../views/Register.vue')
     },
     {
         path: '/stock',
-        name: 'Register',
+        name: 'Home',
+        meta: { LoginView: true },
         component: () => import('../views/HomeView.vue')
     },
     {
@@ -28,35 +31,56 @@ const routes = [
     },
     {
         path: '/tire',
-        name: 'Register',
+        name: 'TireView',
         component: () => import('../views/TireView.vue')
     },
     {
         path: '/import',
-        name: 'Register',
+        name: 'Import',
         component: () => import('../views/ImportProduct.vue')
     },
     {
         path: '/sell',
-        name: 'Register',
+        name: 'Sell',
         component: () => import('../views/SellProduct.vue')
     },
     {
         path: '/customer',
-        name: 'Register',
+        name: 'Customer',
         component: () => import('../views/CustomerView.vue')
     },
     {
         path: '/warehouse',
-        name: 'Register',
+        name: 'Warehouse',
+        meta: { LoginView: true, role: true },
         component: () => import('../views/WareHouse.vue')
     },
     
 
 ]
+function getUserInfoFromToken(token) {
+    const decodedToken = jwt_decode(token);
+    const name = decodedToken.name;
+    const role = decodedToken.role;
+    return { name, role };
+  }
 
-const router = new VueRouter({
-    routes
-  })
+
+const router = new VueRouter({routes})
+router.beforeEach((to, from, next) => {
+    const isLoggedIn = !!localStorage.getItem('token')
+    if (to.meta.LoginView && !isLoggedIn) {
+      alert('Please login first!')
+      next({ path: '/' })
+      console.log(getUserInfoFromToken)
+    }
   
+    if (to.meta.guess && isLoggedIn) {
+      alert("You've already logged in")
+      next({ path: '/stock'})
+    }
+
+  
+    next()
+  })
   export default router

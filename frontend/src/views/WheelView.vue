@@ -132,10 +132,31 @@
 </template>
 
 <script>
+import jwt_decode from 'jwt-decode';
+
+function getUserInfoFromToken(token) {
+  const decodedToken = jwt_decode(token);
+  const name = decodedToken.name;
+  const role = decodedToken.role;
+  return { name, role };
+}
 export default {
   name: "HeaderView",
   data() {
     return {};
+  },mounted() {
+    this.fetchToken()
+  },
+  methods: {
+    fetchToken() {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const data = getUserInfoFromToken(token);
+        if(data.role === 'Employee'){
+          this.$router.push({ path: "/stock" });
+        }
+      }
+    },
   },
 };
 </script>

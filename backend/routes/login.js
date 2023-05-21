@@ -37,7 +37,7 @@ router.post("/login", async function (req, res, next) {
         }
         // createToken
         const token = jwt.sign({
-            name: user[0].EMP_FNAME ,
+            name: user[0].EMP_FNAME+' '+ user[0].EMP_LNAME ,
             role: user[0].EMP_ROLE,
         }, process.env.TOKEN_KEY,
             {
@@ -47,23 +47,7 @@ router.post("/login", async function (req, res, next) {
         console.log('ชื่อ'+user[0].EMP_FNAME + ' '+ user[0].EMP_LNAME)
         console.log(token)
         res.status(201).json(token)
-        // const [tokens, filed2] = await connect.query("SELECT * FROM sys.Token WHERE user_id=?", [user[0].EMP_ID])
-        // try {
-        //     newToken = uuidv4();
-        //     const createAt = moment().format('YYYY-MM-DD HH:mm:ss')
-        //     const expiredAt = moment().add(1, 'minute').format('YYYY-MM-DD HH:mm:ss');
-        //     if (!tokens[0]) {
-        //         await connect.query('INSERT INTO sys.Token(user_id, token, created, expired) VALUE(?, ?, ?, ?)', [user[0].EMP_ID, newToken, createAt, expiredAt])
-        //     }
-        //     else if (tokens[0].expired < new Date()) {
-        //         await connect.query('UPDATE sys.Token SET created=?, expired=? WHERE id=?', [createAt, expiredAt, tokens[0].id])
-        //     }
-        //     connect.commit();
-        //     return res.status(200).send("Success")
-        // }
-        // catch (err) {
 
-        //     throw err;
 
         console.log('success')
     } catch (err) {
