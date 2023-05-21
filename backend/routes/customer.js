@@ -21,6 +21,13 @@ const customerSchema = Joi.object({
     licensePlate: Joi.string().required().external(licensePlateValidator)
 })
 
+const editCustomerSchema = Joi.object({
+    firstname: Joi.string().min(2).max(30).required(),
+    lastname: Joi.string().min(2).max(30).required(),
+    mile: Joi.number().required(),
+    licensePlate: Joi.string().required()
+})
+
 router.get("/customer", verifyToken ,async function(req, res, next){
     try{
         const [customer, filed] =await pool.query("SELECT * from sys.customer")
@@ -47,7 +54,7 @@ router.put("/customer/:id", verifyToken, async function(req, res, next){
     id = req.params.id
     console.log("success3")
     try{
-        customer = await customerSchema.validateAsync(req.body, {abortEarly: false})
+        customer = await editCustomerSchema.validateAsync(req.body, {abortEarly: false})
         await pool.query("UPDATE sys.customer set cus_fname=?, cus_lname=?, cus_mile=?, license_plate=? WHERE cus_id = ?", [customer.firstname, customer.lastname, customer.mile, customer.licensePlate, id])
         res.status(200).json("SUCCESS")
     }catch(err){

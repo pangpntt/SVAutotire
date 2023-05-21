@@ -132,7 +132,7 @@
                 </div>
                 <div class="field is-grouped">
                   <div class="control">
-                    <button class="button is-link px-4" @click="update_product(), classArray.pop(), edit_customer()">Submit</button>
+                    <button class="button is-link px-4" @click="classArray.pop(), edit_customer()">Submit</button>
                   </div>
                 </div>
               </div>
@@ -177,6 +177,7 @@ export default {
           console.log(err)
         })
     },edit_customer(){
+      console.log(1)
       const token = localStorage.getItem('token');
       const config = {
         headers: {
@@ -190,11 +191,9 @@ export default {
         licensePlate: this.editCar
       }
       axios.put(`http://localhost:3000/customer/${this.editId}`, data, config)
-      console.log("success2")
       .then(()=>{
         this.get_data()
         alert("Success")
-        console.log("success1")
       }).catch((err)=>{
         alert("ไม่สำเร็จ")
         console.log("success2")
