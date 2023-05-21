@@ -29,8 +29,8 @@ const roleValidator = (value, helper)=>{
 const signupSchema = Joi.object({
     username: Joi.string().required().min(5).max(20).external(usernameValidator).pattern(/^[A-Za-z0-9]+$/),
     password: Joi.string().required().pattern(/^[A-Za-z0-9]+$/).min(4).max(20),
-    firstname: Joi.string().pattern(/^[\u0E00-\u0E7F]+$/).required().max(50),
-    lastname: Joi.string().pattern(/^[\u0E00-\u0E7F]+$/).required().max(50),
+    firstname: Joi.string().required().max(50),
+    lastname: Joi.string().required().max(50),
     role: Joi.string().pattern(/^[A-Za-z]+$/).required().custom(roleValidator)
 })
 

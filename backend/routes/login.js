@@ -24,7 +24,7 @@ router.post("/login", async function (req, res, next) {
     const connect = await pool.getConnection()
     await connect.beginTransaction()
     try {
-        const [user, filed] = await connect.query("SELECT *, (EMP_FNAME+ ' '+ EMP_LNAME) AS EMP_FULLNAME FROM sys.Employees WHERE EMP_USERNAME=?", [login.username])
+        const [user, filed] = await connect.query("SELECT * FROM sys.Employees WHERE EMP_USERNAME=?", [login.username])
         if (user[0]) {
             if (!(await bcrypt.compare(password, user[0].EMP_PASSWORD))) {
                 console.log('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง')
@@ -37,13 +37,14 @@ router.post("/login", async function (req, res, next) {
         }
         // createToken
         const token = jwt.sign({
-            name: user[0].EMP_FULLNAME,
+            name: user[0].EMP_FNAME ,
             role: user[0].EMP_ROLE,
         }, process.env.TOKEN_KEY,
             {
                 expiresIn: "24h"
             }
         )
+        console.log('ชื่อ'+user[0].EMP_FNAME + ' '+ user[0].EMP_LNAME)
         console.log(token)
         res.status(201).json(token)
         // const [tokens, filed2] = await connect.query("SELECT * FROM sys.Token WHERE user_id=?", [user[0].EMP_ID])
