@@ -72,36 +72,15 @@
           <thead>
             <tr>
               <th rowspan="2" class="has-text-centered">รูปสินค้า</th>
-              <th rowspan="2" class="has-text-centered">บริษัท</th>
-              <th rowspan="2" class="has-text-centered">MODEL</th>
-              <th rowspan="2" class="has-text-centered">SIZE</th>
-              <th rowspan="2" class="has-text-centered">รู (PCD)</th>
-              <th rowspan="2" class="has-text-centered">ET</th>
-              <th rowspan="2" class="has-text-centered">CB</th>
-              <th rowspan="2" class="has-text-centered">สี</th>
-              <th colspan="3" class="has-text-centered">จำนวน</th>
-              <th rowspan="2" class="has-text-centered">TOTAL</th>
-              <th rowspan="2" class="has-text-centered">ที่เก็บ</th>
-              <th rowspan="2" class="has-text-centered">ราคาขาย</th>
-            </tr>
-            <tr>
-              <th class="has-text-centered">SV</th>
-              <th class="has-text-centered">โชว์</th>
-              <th class="has-text-centered">TN</th>
+              <th rowspan="2" class="has-text-centered">รหัสสินค้า</th>
+              <th rowspan="2" class="has-text-centered">ชื่อสินค้า</th>
+              <th rowspan="2" class="has-text-centered">จำนวน</th>
+              <th rowspan="2" class="has-text-centered">ราคา</th>
             </tr>
           </thead>
           <tbody>
             <tr class="has-text-centered">
               <td><img id="img_in_table" alt="product_img"></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
               <td></td>
               <td></td>
               <td></td>

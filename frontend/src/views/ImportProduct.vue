@@ -80,26 +80,35 @@
         <!-- ปุ่มเพิ่มสินค้า -->
         <div class="block">
           <a
-            class="button is-primary px-3"
-            @click="classArray2.push('is-active')"
+            class="button is-primary px-3 mr-4"
+            @click="classArrayTire.push('is-active')"
           >
             <span class="icon">
               <font-awesome-icon :icon="['fas', 'square-plus']" />
             </span>
-            <p>เพิ่มข้อมูลการนำเข้าสินค้า</p>
+            <p>เพิ่มสินค้ายาง</p>
+          </a>
+          <a
+            class="button is-primary px-3"
+            @click="classArrayWheel.push('is-active')"
+          >
+            <span class="icon">
+              <font-awesome-icon :icon="['fas', 'square-plus']" />
+            </span>
+            <p>เพิ่มสินค้าล้อ</p>
           </a>
         </div>
 
-        <!-- modal เพิ่มสินค้า -->
-        <div id="modal1" :class="classArray2">
+        <!-- modal เพิ่มสินค้ายาง -->
+        <div id="modal1" :class="classArrayTire">
           <div class="modal-background"></div>
           <div class="modal-card">
             <header class="modal-card-head px-5 py-3">
-              <p class="modal-card-title">เพิ่มข้อมูลการนำเข้าสินค้า</p>
+              <p class="modal-card-title">เพิ่มสินค้ายาง</p>
               <button
                 class="delete"
                 aria-label="close"
-                @click="classArray2.pop()"
+                @click="classArrayTire.pop()"
               ></button>
             </header>
             <section class="modal-card-body px-5 py-3">
@@ -119,15 +128,6 @@
                     <label>ชื่อสินค้า</label>
                     <input class="input" />
                   </div>
-                  <div class="column">
-                    <label>ประเภทสินค้า</label><br />
-                    <div class="select">
-                      <select class="select">
-                        <option value="ล้อ">ล้อ</option>
-                        <option value="ยาง">ยาง</option>
-                      </select>
-                    </div>
-                  </div>
                 </div>
                 <div class="columns">
                   <div class="column pr-4">
@@ -145,42 +145,38 @@
                     <input class="input" />
                   </div>
                   <div class="column">
-                    <label>บริษัท</label>
+                    <label>ขอบ</label>
                     <input class="input" />
                   </div>
                 </div>
                 <div class="columns">
                   <div class="column pr-4">
-                    <label>สัปดาห์</label>
-                    <input class="input" type="number" />
-                  </div>
-                  <div class="column">
-                    <label>ปี</label>
-                    <input class="input" type="number" />
-                  </div>
-                </div>
-                <div class="columns">
-                  <div class="column pr-4">
-                    <label>วันที่นำเข้า</label>
-                    <input class="input" type="date" />
-                  </div>
-                  <div class="column">
-                    <label>ที่เก็บ</label><br />
-                    <div class="select">
-                      <select class="select">
-                        <option></option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="columns">
-                  <div class="column pr-4">
-                    <label>ราคาที่นำเข้า</label>
+                    <label>ปียาง</label>
                     <input class="input" type="number" />
                   </div>
                   <div class="column">
                     <label>จำนวน</label>
                     <input class="input" type="number" />
+                  </div>
+                </div>
+                <div class="columns">
+                  <div class="column pr-4">
+                    <label>ราคานำเข้า</label>
+                    <input class="input" type="text" />
+                  </div>
+                  <div class="column pr-4">
+                    <label>ราคาขาย</label>
+                    <input class="input" type="text" />
+                  </div>
+                </div>
+                <div class="columns">
+                  <div class="column pr-4">
+                    <label>ที่เก็บ</label>
+                    <input class="input" type="text" />
+                  </div>
+                  <div class="column pr-4">
+                    <label>วันที่นำเข้า</label>
+                    <input class="input" type="date" />
                   </div>
                 </div>
                 <div class="columns">
@@ -193,7 +189,118 @@
                   <div class="control">
                     <button
                       class="button is-link px-4"
-                      @click="add_product(), classArray2.pop()"
+                      @click="add_product(), classArrayTire.pop()"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- modal เพิ่มสินค้าล้อ -->
+        <div id="modal" :class="classArrayWheel">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head px-5 py-3">
+              <p class="modal-card-title">เพิ่มสินค้าล้อ</p>
+              <button
+                class="delete"
+                aria-label="close"
+                @click="classArrayWheel.pop()"
+              ></button>
+            </header>
+            <section class="modal-card-body px-5 py-3">
+              <div class="content">
+                <div class="columns">
+                  <div class="column pr-4">
+                    <label>รหัสสินค้า</label>
+                    <input class="input" />
+                  </div>
+                  <div class="column">
+                    <label>รูปสินค้า</label>
+                    <input type="file" id="img" name="img" accept="image/*" />
+                  </div>
+                </div>
+                <div class="columns">
+                  <div class="column pr-4">
+                    <label>ชื่อสินค้า</label>
+                    <input class="input" />
+                  </div>
+                </div>
+                <div class="columns">
+                  <div class="column pr-4">
+                    <label>บริษัท</label>
+                    <input class="input" />
+                  </div>
+                  <div class="column">
+                    <label>Model</label>
+                    <input class="input" type="number" />
+                  </div>
+                </div>
+                <div class="columns">
+                  <div class="column pr-4">
+                    <label>ขนาด</label>
+                    <input class="input" />
+                  </div>
+                  <div class="column">
+                    <label>PCD</label>
+                    <input class="input" />
+                  </div>
+                </div>
+                <div class="columns">
+                  <div class="column pr-4">
+                    <label>ET</label>
+                    <input class="input" type="number" />
+                  </div>
+                  <div class="column">
+                    <label>CB</label>
+                    <input class="input" type="number" />
+                  </div>
+                </div>
+                <div class="columns">
+                  <div class="column pr-4">
+                    <label>สี</label>
+                    <input class="input" type="text" />
+                  </div>
+                  <div class="column pr-4">
+                    <label>จำนวน</label>
+                    <input class="input" type="number" />
+                  </div>
+                </div>
+                <div class="columns">
+                  <div class="column pr-4">
+                    <label>ราคานำเข้า</label>
+                    <input class="input" type="text" />
+                  </div>
+                  <div class="column pr-4">
+                    <label>ราคาขาย</label>
+                    <input class="input" type="text" />
+                  </div>
+                </div>
+                <div class="columns">
+                  <div class="column pr-4">
+                    <label>ที่เก็บ</label>
+                    <input class="input" type="text" />
+                  </div>
+                  <div class="column pr-4">
+                    <label>วันที่นำเข้า</label>
+                    <input class="input" type="date" />
+                  </div>
+                </div>
+                <div class="columns">
+                  <div class="column">
+                    <label>หมายเหตุ</label>
+                    <textarea class="textarea"></textarea>
+                  </div>
+                </div>
+                <div class="field is-grouped">
+                  <div class="control">
+                    <button
+                      class="button is-link px-4"
+                      @click="add_product(), classArrayWheel.pop()"
                     >
                       Submit
                     </button>
@@ -220,15 +327,7 @@
                     <th class="has-text-centered">รหัสสินค้า</th>
                     <th class="has-text-centered">ชื่อสินค้า</th>
                     <th class="has-text-centered">ประเภทสินค้า</th>
-                    <th class="has-text-centered">รูปสินค้า</th>
-                    <th class="has-text-centered">ยี่ห้อ</th>
-                    <th class="has-text-centered">รุ่น</th>
-                    <th class="has-text-centered">ขนาด</th>
-                    <th class="has-text-centered">บริษัท</th>
-                    <th class="has-text-centered">สัปดาห์</th>
-                    <th class="has-text-centered">ปี</th>
                     <th class="has-text-centered">วันที่นำเข้า</th>
-                    <th class="has-text-centered">ที่เก็บ</th>
                     <th class="has-text-centered">ราคาที่นำเข้า</th>
                     <th class="has-text-centered">จำนวน</th>
                     <th colspan="3"></th>
@@ -236,14 +335,6 @@
             </thead>
             <tbody>
                 <tr class="has-text-centered">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="image is-128x128"><img id="img_in_table" alt="product_img"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -258,15 +349,14 @@
                         </a>
                     </td>
                     <td class="has-text-centered">
-                        <a @click="isActive = true, del_index = index">
-                        <span class="icon"><font-awesome-icon :icon="['fas', 'trash']" style="color: #d41e11;" /></span>
-                    </a>
-                    </td>
-                    <td class="has-text-centered">
                         <a @click="classArray3.push('is-active')">
                         <span class="icon"><font-awesome-icon :icon="['fas', 'plus']" /></span>
                         </a>
-
+                    </td>
+                    <td class="has-text-centered">
+                        <a @click="isActive = true, del_index = index">
+                        <span class="icon"><font-awesome-icon :icon="['fas', 'trash']" style="color: #d41e11;" /></span>
+                    </a>
                     </td>
 
                 </tr>
@@ -312,67 +402,6 @@
             <section class="modal-card-body px-5 py-3">
                 <div class="content">
                     <div class="columns">
-                        <div class="column pr-4">
-                            <label>รหัสสินค้า</label>
-                            <input class="input" />
-                        </div>
-                    </div>
-                    <div class="columns">
-                        <div class="column pr-4">
-                            <label>ชื่อสินค้า</label>
-                            <input class="input" />
-                        </div>
-                        <div class="column">
-                            <label>ประเภทสินค้า</label><br>
-                            <div class="select">
-                                <select  class="select">
-                                    <option value="ล้อ">ล้อ</option>
-                                    <option value="ยางรถ">ยาง</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns">
-                        <div class="column pr-4">
-                            <label>ยี่ห้อ</label>
-                            <input  class="input" />
-                        </div>
-                        <div class="column">
-                            <label>รุ่น</label>
-                            <input class="input" />
-                        </div>
-                    </div>
-                    <div class="columns">
-                        <div class="column pr-4">
-                            <label>ขนาด</label>
-                            <input class="input" type="text" />
-                        </div>
-                        <div class="column">
-                            <label>บริษัท</label>
-                            <input class="input" type="text" />
-                        </div>
-                    </div>
-                    <div class="columns">
-                        <div class="column pr-4">
-                            <label>สัปดาห์</label>
-                            <input  class="input" type="number" />
-                        </div>
-                        <div class="column">
-                            <label>ปี</label>
-                            <input class="input" type="number" />
-                        </div>
-                    </div>
-                    <div class="columns">
-                        <div class="column">
-                            <label>ที่เก็บ</label><br>
-                            <div class="select">
-                                <select class="select">
-                                    <option ></option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns">
                         <div class="column">
                             <label>จำนวนที่แก้ไข</label>
                             <input class="input" type="number" />
@@ -395,7 +424,7 @@
         </div>
         </div>
 
-    <!-- modal เพิ่มสินค้า -->
+    <!-- modal จำนวนเพิ่มสินค้า -->
     <div id="modal4" :class="classArray3">
         <div class="modal-background"></div>
             <div class="modal-card">
@@ -405,67 +434,6 @@
                 </header>
                 <section class="modal-card-body px-5 py-3">
                     <div class="content">
-                        <div class="columns">
-                            <div class="column">
-                                <label>รหัสสินค้า</label>
-                                <input  class="input" />
-                            </div>
-                        </div>
-                        <div class="columns">
-                            <div class="column pr-4">
-                                <label>ชื่อสินค้า</label>
-                                <input  class="input" />
-                            </div>
-                            <div class="column">
-                                <label>ประเภทสินค้า</label><br>
-                                <div class="select">
-                                    <select class="select">
-                                        <option value="ล้อ">ล้อ</option>
-                                        <option value="ยางรถ">ยาง</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="columns">
-                            <div class="column pr-4">
-                                <label>ยี่ห้อ</label>
-                                <input  class="input" />
-                            </div>
-                            <div class="column">
-                                <label>รุ่น</label>
-                                <input  class="input" />
-                            </div>
-                        </div>
-                        <div class="columns">
-                            <div class="column pr-4">
-                                <label>ขนาด</label>
-                                <input  class="input" type="text" />
-                            </div>
-                            <div class="column">
-                                <label>บริษัท</label>
-                                <input  class="input" type="text" />
-                            </div>
-                        </div>
-                        <div class="columns">
-                            <div class="column pr-4">
-                                <label>สัปดาห์</label>
-                                <input  class="input" type="number" />
-                            </div>
-                            <div class="column">
-                                <label>ปี</label>
-                                <input  class="input" type="number" />
-                            </div>
-                        </div>
-                        <div class="columns">
-                            <div class="column">
-                                <label>ที่เก็บ</label><br>
-                                <div class="select">
-                                    <select  class="select">
-                                        <option></option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
                         <div class="columns">
                             <div class="column">
                                 <label>จำนวนที่เพิ่ม</label>
@@ -499,7 +467,8 @@ export default {
       modal: true,
       isActive: false,
       classArray: ["modal"],
-      classArray2: ["modal"],
+      classArrayTire: ["modal"],
+      classArrayWheel: ["modal"],
       classArray3: ["modal"],
     };
   },

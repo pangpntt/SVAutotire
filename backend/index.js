@@ -22,11 +22,14 @@ const index = require('./routes/index')
 const login = require('./routes/login')
 const customer = require('./routes/customer')
 const warehouse = require('./routes/warehouse')
+const product = require('./routes/product')
 app.use(register.router)
 app.use(index.router)
 app.use(login.router)
 app.use(customer.router)
+app.use(product.router)
 app.use(warehouse.router)
+
 
 
 
