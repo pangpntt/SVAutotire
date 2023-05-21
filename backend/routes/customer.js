@@ -43,4 +43,17 @@ router.post("/customer", verifyToken, async function(req, res, next){
     }
 })
 
+router.put("/customer/:id", verifyToken, async function(req, res, next){
+    id = req.params.id
+    console.log("success3")
+    try{
+        customer = await customerSchema.validateAsync(req.body, {abortEarly: false})
+        await pool.query("UPDATE sys.customer set cus_fname=?, cus_lname=?, cus_mile=?, license_plate=? WHERE cus_id = ?", [customer.firstname, customer.lastname, customer.mile, customer.licensePlate, id])
+        res.status(200).json("SUCCESS")
+    }catch(err){
+        console.log(err)
+        return res.status(400).send(err)
+    }
+})
+
 exports.router = router;
