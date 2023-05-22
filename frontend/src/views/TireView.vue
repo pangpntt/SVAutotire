@@ -13,6 +13,12 @@
                 </router-link>
               </li>
               <li>
+              <router-link to="/register">
+                <span class="icon"><font-awesome-icon :icon="['fas', 'store']" /></span>
+                <span class="title">สมัครสมาชิก</span>
+              </router-link>
+            </li>
+              <li>
                 <router-link to="/tire">
                   <span class="icon"
                     ><font-awesome-icon :icon="['fas', 'gear']"
@@ -63,10 +69,10 @@
               <div class="bottom">
                 <li>
                   <router-link to="/">
-                    <span class="icon"
+                    <span class="icon" @click="logout()"
                       ><font-awesome-icon :icon="['fas', 'right-from-bracket']"
                     /></span>
-                    <span class="title">ออกจากระบบ</span>
+                    <span @click="logout()" class="title">ออกจากระบบ</span>
                   </router-link>
                 </li>
               </div>
@@ -127,7 +133,15 @@
     name: "HeaderView",
     data() {
       return {};
-    },
+    },methods:{
+      logout(){
+      console.log(1)
+      localStorage.removeItem('token')
+      .then(()=>{
+        this.$router.push({ path: "/" });
+      })
+    }
+    }
   };
   </script>
   
