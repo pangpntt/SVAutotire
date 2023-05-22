@@ -13,7 +13,7 @@
               </router-link>
             </li>
             <li>
-              <router-link to="/register">
+              <router-link to="/register" v-show="role === 'Manager'">
                 <span class="icon"><font-awesome-icon :icon="['fas', 'store']" /></span>
                 <span class="title">สมัครสมาชิก</span>
               </router-link>
@@ -35,11 +35,11 @@
               </router-link>
             </li>
             <li>
-              <router-link to="/import">
+              <router-link to="/import" v-show="role === 'Manager'">
                 <span class="icon"
                   ><font-awesome-icon :icon="['fas', 'truck-arrow-right']"
                 /></span>
-                <span class="title">การนำเข้าสินค้า</span>
+                <span class="title" >การนำเข้าสินค้า</span>
               </router-link>
             </li>
             <li>

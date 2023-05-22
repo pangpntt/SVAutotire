@@ -11,8 +11,8 @@
               </router-link>
             </li>
             <li>
-              <router-link to="/register">
-                <span class="icon"><font-awesome-icon :icon="['fas', 'store']" /></span>
+              <router-link to="/register" v-show="role === 'Manager'">
+                <span  class="icon"><font-awesome-icon :icon="['fas', 'store']" /></span>
                 <span class="title">สมัครสมาชิก</span>
               </router-link>
             </li>
@@ -29,7 +29,7 @@
               </router-link>
             </li>
             <li>
-              <router-link to="/import">
+              <router-link to="/import" v-show="role === 'Manager'">
                 <span class="icon"><font-awesome-icon :icon="['fas', 'truck-arrow-right']" /></span>
                 <span class="title">การนำเข้าสินค้า</span>
               </router-link>
@@ -48,7 +48,7 @@
             </li>
             <li>
               <router-link to="/warehouse">
-                <span class="icon"><font-awesome-icon :icon="['fas', 'warehouse']" /></span>
+                <span  class="icon"><font-awesome-icon :icon="['fas', 'warehouse']" /></span>
                 <span class="title">คลังสินค้า</span>
               </router-link>
             </li>
@@ -79,7 +79,7 @@
           <span class="icon">
             <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
           </span>
-          <input class="input" v-model="input_warehouse" type="text" placeholder="ค้นหาคลังสินค้า"
+          <input class="input" v-model="inputWarehouse" type="text" placeholder="ค้นหาคลังสินค้า"
             style="width: 200px; height: 40px;">
         </div>
         <!-- ตารางแสดงข้อมูลคลังสินค้า -->
@@ -91,7 +91,7 @@
               <th colspan="2"></th>
             </tr>
           </thead>
-          <tbody v-for="warehouse in warehouses" :key="warehouse.warehouse_id">
+          <tbody v-for="warehouse in showWarehouse" :key="warehouse.warehouse_id">
             <td>
               {{ warehouse.warehouse_name }}
             </td>
@@ -212,6 +212,13 @@
   
 <script>
 import axios from "axios";
+import jwt_decode from 'jwt-decode';
+function getUserInfoFromToken(token) {
+  const decodedToken = jwt_decode(token);
+  const name = decodedToken.name;
+  const role = decodedToken.role;
+  return { name, role };
+}
 export default {
   name: "HeaderView",
   data() {
@@ -227,7 +234,9 @@ export default {
       numDeleteWarehouse: null,
       editName: null,
       editNote: null,
-      editNum: null
+      editNum: null,
+      showWarehouse: null,
+      inputWarehouse: null
 
     };
   },
@@ -265,6 +274,7 @@ export default {
 
         .then((respones) => {
           this.warehouses = respones.data
+          this.showWarehouse = this.warehouses
         })
         .catch((err) => {
           console.log(err)
@@ -302,6 +312,22 @@ export default {
       .then(()=>{
         this.$router.push({ path: "/" });
       })
+    },checkRole(){
+      const token = localStorage.getItem('token');
+      const { name, role } = getUserInfoFromToken(token)
+      if(role === 'Employees'){
+        alert(name+" คุณไม่มีสิทธ์เข้าถึง")
+        return false
+      }
+    }
+  }, watch:{
+    inputWarehouse(newValue, oldValue){
+      this.showWarehouse = this.warehouses.filter(warehouse=>{
+          console.log(newValue, oldValue)
+          return warehouse.warehouse_name.toLowerCase().includes(newValue.toLowerCase())
+        }
+      )
+
     }
   }
 }

@@ -15,7 +15,7 @@ const routes = [
     {
         path: '/register',
         name: 'Register',
-        meta: { LoginView: true },
+        meta: { LoginView: true, role: true },
         component: () => import('../views/Register.vue')
     },
     {
@@ -27,32 +27,37 @@ const routes = [
     {
         path: '/wheel',
         name: 'Register',
+        meta: { LoginView: true},
         component: () => import('../views/WheelView.vue')
     },
     {
         path: '/tire',
         name: 'TireView',
+        meta: { LoginView: true},
         component: () => import('../views/TireView.vue')
     },
     {
         path: '/import',
         name: 'Import',
+        meta: { LoginView: true, role: true },
         component: () => import('../views/ImportProduct.vue')
     },
     {
         path: '/sell',
         name: 'Sell',
+        meta: { LoginView: true},
         component: () => import('../views/SellProduct.vue')
     },
     {
         path: '/customer',
         name: 'Customer',
+        meta: { LoginView: true},
         component: () => import('../views/CustomerView.vue')
     },
     {
         path: '/warehouse',
         name: 'Warehouse',
-        meta: { LoginView: true, role: true },
+        meta: { LoginView: true},
         component: () => import('../views/WareHouse.vue')
     },
     
@@ -69,27 +74,32 @@ function getUserInfoFromToken(token) {
 const router = new VueRouter({routes})
 router.beforeEach((to, from, next) => {
     const isLoggedIn = !!localStorage.getItem('token')
+
     if (to.meta.LoginView && !isLoggedIn) {
       alert('Please login first!')
       next({ path: '/' })
-      console.log(getUserInfoFromToken)
+        
     }
-  
+
+
     if (to.meta.guess && isLoggedIn) {
         console.log(2)
       alert("You've already logged in")
       next({ path: '/stock'})
     }
+    if(to.meta.role && isLoggedIn){
+        const {name, role} = getUserInfoFromToken(localStorage.getItem('token'))
 
-    if(to.meta.guess){
-        const {name, role} = getUserInfoFromToken(isLoggedIn)
         if(role === 'Employee'){
-            alert(`${name}`+' ไม่สามารถเข้าถึงได้')
-            next({path: '/stock'})
+            alert(name + " คุณไม่มีสิทธิ์ที่จะเข้าหน้านี้")
+            next(false)
         }
+
+    }else{
+        next()
     }
 
-  
-    next()
+
+
   })
   export default router

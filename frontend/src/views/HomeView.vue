@@ -11,7 +11,7 @@
               </router-link>
             </li>
             <li>
-              <router-link to="/register">
+              <router-link to="/register" v-show="role === 'Manager'">
                 <span class="icon"><font-awesome-icon :icon="['fas', 'store']" /></span>
                 <span class="title">สมัครสมาชิก</span>
               </router-link>
@@ -29,7 +29,7 @@
               </router-link>
             </li>
             <li>
-              <router-link to="/import">
+              <router-link to="/import" v-show="role === 'Manager'">
                 <span class="icon"><font-awesome-icon :icon="['fas', 'truck-arrow-right']" /></span>
                 <span class="title">การนำเข้าสินค้า</span>
               </router-link>
@@ -111,7 +111,9 @@ function getUserInfoFromToken(token) {
 export default {
   name: "HeaderView",
   data() {
-    return {};
+    return {
+      role : null
+    };
   },
   mounted() {
     this.fetchToken()
@@ -121,6 +123,7 @@ export default {
       const token = localStorage.getItem('token');
       if (token) {
         const { name, role } = getUserInfoFromToken(token);
+        this.role = role
         console.log(name + ' : ' + role);
       }
     },logout(){
@@ -129,7 +132,7 @@ export default {
       .then(()=>{
         this.$router.push({ path: "/" });
       })
-    }
+    }, 
   },
 };
 </script>
