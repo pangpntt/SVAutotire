@@ -11,6 +11,12 @@
               </router-link>
             </li>
             <li>
+              <router-link to="/register">
+                <span class="icon"><font-awesome-icon :icon="['fas', 'store']" /></span>
+                <span class="title">สมัครสมาชิก</span>
+              </router-link>
+            </li>
+            <li>
               <router-link to="/tire">
                 <span class="icon"><font-awesome-icon :icon="['fas', 'gear']" /></span>
                 <span class="title">ยาง</span>
@@ -49,8 +55,8 @@
             <div class="bottom">
               <li>
                 <router-link to="/">
-                  <span class="icon"><font-awesome-icon :icon="['fas', 'right-from-bracket']" /></span>
-                  <span class="title">ออกจากระบบ</span>
+                  <span @click="logout()" class="icon"><font-awesome-icon :icon="['fas', 'right-from-bracket']" /></span>
+                  <span @click="logout()" class="title">ออกจากระบบ</span>
                 </router-link>
               </li>
             </div>
@@ -198,6 +204,12 @@ export default {
         alert("ไม่สำเร็จ")
         console.log("success2")
         console.log(err)
+      })
+    }, logout(){
+      console.log(1)
+      localStorage.removeItem('token')
+      .then(()=>{
+        this.$router.push({ path: "/" });
       })
     }
 

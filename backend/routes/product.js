@@ -61,32 +61,35 @@ router.post("/wheel",  upload.single('myImage'), async function (req, res, next)
 
         if(product[0]) {
             console.log(product[0])
-            await conn.query("UPDATE sys.product SET total=? WHERE product_code = ?", [req.body.total, req.body.product_code])
+            let result = await conn.query("UPDATE sys.product SET total=? WHERE `product_code` = ?", [req.body.total, req.body.product_code])
+            
             res.json({ message: "Update product " + req.body.product_code + " Complete" })
+            var productId = result[0].insertId
         }
         else {
             let results = await conn.query(
-                "INSERT INTO sys.product(product_code, product_name, price, total) VALUES(?,?,?,?)",
-                [req.body.product_code, req.body.product_name, req.body.price, req.body.total]
+                "INSERT INTO sys.product(image, product_code, product_name, price, total) VALUES(?,?,?,?,?)",
+                [file.path.substr(6), req.body.product_code, req.body.product_name, req.body.price, req.body.total]
             )
             var productId = results[0].insertId;
             res.json({ message: "Insert " + req.body.product_code + " Complete" })
 
-            await conn.query("UPDATE sys.product SET image=? WHERE id=?;",[file.path.substr(6), productId])
-            console.log(file.path.substr(6))
+            // await conn.query("UPDATE sys.product SET image=? WHERE id=?;",[file.path.substr(6), productId])
+            // console.log(file.path.substr(6))
         }
-
-        // const [warehouse, feild] = await conn.query("SELECT * FROM sys.warehouse WHERE warehouse_name=?", [req.body.warehouse_name])
-        // if(!warehouse[0]){
-        //     // await conn.rollback();
-        //     return res.json({"message": "ไม่มีคลังสินค้านี้"})
-        // }
-
-        // await conn.query(
-        //     "INSERT INTO sys.wheel(wheel_code, company, model, size, pcd, et, cb, color, price, note, warehouse_id, wheel_name) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
-        //     [req.body.product_code, req.body.company, req.body.model, req.body.size, req.body.pcd, req.body.et, req.body.cb, req.body.color, req.body.price, req.body.note, req.body.warehouse_id, req.body.product_name]
-        // )
-        // res.json({ message: "Insert " + req.body.product_code + " Complete" })
+        console.log(2)
+        const [warehouse, feild] = await conn.query("SELECT * FROM sys.warehouse WHERE warehouse_name=?", [req.body.warehouse_name])
+        if(warehouse.length === 0){
+            // await conn.rollback();
+            return res.json({"message": "ไม่มีคลังสินค้านี้"})
+        }
+        else{
+            await conn.query(
+                "INSERT INTO sys.wheel(product_id, company, model, size, pcd, et, cb, color, total, price, warehouse, note) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+                [productId, req.body.company, req.body.model, req.body.size, req.body.pcd, req.body.et, req.body.cb, req.body.color, req.body.total, req.body.price, warehouse[0].warehouse_id, req.body.note]
+            )
+            res.json({ message: "Insert " + req.body.product_code + " Complete" })
+        }
 
         // await conn.query(
         //     "INSERT INTO sys.Purchase_history(product_id, product_code, Purchase_history_date, product_name, price, total) VALUES(?, ?, ?, ?, ?, ?)",

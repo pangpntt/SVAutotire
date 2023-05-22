@@ -13,6 +13,12 @@
               </router-link>
             </li>
             <li>
+              <router-link to="/register">
+                <span class="icon"><font-awesome-icon :icon="['fas', 'store']" /></span>
+                <span class="title">สมัครสมาชิก</span>
+              </router-link>
+            </li>
+            <li>
               <router-link to="/tire">
                 <span class="icon"
                   ><font-awesome-icon :icon="['fas', 'gear']"
@@ -63,10 +69,10 @@
             <div class="bottom">
               <li>
                 <router-link to="/">
-                  <span class="icon"
+                  <span class="icon" @click="logout()"
                     ><font-awesome-icon :icon="['fas', 'right-from-bracket']"
                   /></span>
-                  <span class="title">ออกจากระบบ</span>
+                  <span @click="logout()" class="title">ออกจากระบบ</span>
                 </router-link>
               </li>
             </div>
@@ -313,149 +319,187 @@
 
         <!-- search -->
         <div class="control has-icons-left">
-            <span class="icon">
-                <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
-            </span>
-            <input class="input" v-model="search_name" type="text" placeholder="ค้นหา"
-                        style="width: 200px; height: 40px;">
+          <span class="icon">
+            <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
+          </span>
+          <input
+            class="input"
+            v-model="search_name"
+            type="text"
+            placeholder="ค้นหา"
+            style="width: 200px; height: 40px"
+          />
         </div>
 
         <!-- ตารางแสดงข้อมูล -->
-        <table class="table is-bordered is-striped is-hoverable is-fullwidth mt-5">
-            <thead>
-                <tr>
-                    <th class="has-text-centered">รหัสสินค้า</th>
-                    <th class="has-text-centered">ชื่อสินค้า</th>
-                    <th class="has-text-centered">ประเภทสินค้า</th>
-                    <th class="has-text-centered">วันที่นำเข้า</th>
-                    <th class="has-text-centered">ราคาที่นำเข้า</th>
-                    <th class="has-text-centered">จำนวน</th>
-                    <th colspan="3"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="has-text-centered">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="has-text-centered">
-                        <a @click="classArray.push('is-active'), edit_product(index)">
-                        <span class="icon">
-                            <font-awesome-icon :icon="['fas', 'pen']" />
-                        </span>
-                        </a>
-                    </td>
-                    <td class="has-text-centered">
-                        <a @click="classArray3.push('is-active')">
-                        <span class="icon"><font-awesome-icon :icon="['fas', 'plus']" /></span>
-                        </a>
-                    </td>
-                    <td class="has-text-centered">
-                        <a @click="isActive = true, del_index = index">
-                        <span class="icon"><font-awesome-icon :icon="['fas', 'trash']" style="color: #d41e11;" /></span>
-                    </a>
-                    </td>
-
-                </tr>
-            </tbody>
+        <table
+          class="table is-bordered is-striped is-hoverable is-fullwidth mt-5"
+        >
+          <thead>
+            <tr>
+              <th class="has-text-centered">รหัสสินค้า</th>
+              <th class="has-text-centered">ชื่อสินค้า</th>
+              <th class="has-text-centered">ประเภทสินค้า</th>
+              <th class="has-text-centered">วันที่นำเข้า</th>
+              <th class="has-text-centered">ราคาที่นำเข้า</th>
+              <th class="has-text-centered">จำนวน</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="has-text-centered">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="has-text-centered">
+                <a @click="classArray.push('is-active'), edit_product(index)">
+                  <span class="icon">
+                    <font-awesome-icon :icon="['fas', 'pen']" />
+                  </span>
+                </a>
+              </td>
+              <td class="has-text-centered">
+                <a @click="classArray3.push('is-active')">
+                  <span class="icon"
+                    ><font-awesome-icon :icon="['fas', 'plus']"
+                  /></span>
+                </a>
+              </td>
+              <td class="has-text-centered">
+                <a @click="(isActive = true), (del_index = index)">
+                  <span class="icon"
+                    ><font-awesome-icon
+                      :icon="['fas', 'trash']"
+                      style="color: #d41e11"
+                  /></span>
+                </a>
+              </td>
+            </tr>
+          </tbody>
         </table>
 
         <!-- modal ลบ -->
-        <div id="modal2" :class="{modal: modal, 'is-active': isActive}">
-            <div class="modal-background"></div>
-                <div class="modal-content">
-                    <div class="card">
-                        <div class="card-content px-5 py-5">
-                            <p class="title is-size-3">
-                                ยืนยันการลบข้อมูล
-                            </p>
-                        </div>
-                        <footer class="card-footer">
-                            <p class="card-footer-item has-background-primary">
-                                <span>
-                                    <a class="has-text-white is-size-5 py-5" @click="del_product()">ยืนยัน</a>
-                                </span>
-                            </p>
-                            <p class="card-footer-item has-background-danger">
-                                <span>
-                                    <a class="has-text-white is-size-5 py-5" @click="isActive=false">ยกเลิก</a>
-                                </span>
-                            </p>
-                        </footer>
-                    </div>
-                </div>
-                    <button class="modal-close is-large" aria-label="close" @click="isActive = false"></button>
-                </div>
+        <div id="modal2" :class="{ modal: modal, 'is-active': isActive }">
+          <div class="modal-background"></div>
+          <div class="modal-content">
+            <div class="card">
+              <div class="card-content px-5 py-5">
+                <p class="title is-size-3">ยืนยันการลบข้อมูล</p>
+              </div>
+              <footer class="card-footer">
+                <p class="card-footer-item has-background-primary">
+                  <span>
+                    <a
+                      class="has-text-white is-size-5 py-5"
+                      @click="del_product()"
+                      >ยืนยัน</a
+                    >
+                  </span>
+                </p>
+                <p class="card-footer-item has-background-danger">
+                  <span>
+                    <a
+                      class="has-text-white is-size-5 py-5"
+                      @click="isActive = false"
+                      >ยกเลิก</a
+                    >
+                  </span>
+                </p>
+              </footer>
+            </div>
+          </div>
+          <button
+            class="modal-close is-large"
+            aria-label="close"
+            @click="isActive = false"
+          ></button>
+        </div>
       </div>
 
       <!-- modal แก้ไขจำนวนสินค้า -->
       <div id="modal3" :class="classArray">
         <div class="modal-background"></div>
-            <div class="modal-card">
-                <header class="modal-card-head px-5 py-3">
-                    <p class="modal-card-title">แก้ไขจำนวนสินค้า</p>
-                    <button class="delete" aria-label="close" @click="classArray.pop()"></button>
-                </header>
-            <section class="modal-card-body px-5 py-3">
-                <div class="content">
-                    <div class="columns">
-                        <div class="column">
-                            <label>จำนวนที่แก้ไข</label>
-                            <input class="input" type="number" />
-                        </div>
-                    </div>
-                    <div class="columns">
-                        <div class="column">
-                            <label>หมายเหตุ</label>
-                            <textarea class="textarea"></textarea>
-                        </div>
-                    </div>
-                    <div class="field is-grouped">
-                        <div class="control">
-                            <button class="button is-link px-4"
-                                @click="update_product(), classArray.pop()">Submit</button>
-                        </div>
-                    </div>
+        <div class="modal-card">
+          <header class="modal-card-head px-5 py-3">
+            <p class="modal-card-title">แก้ไขจำนวนสินค้า</p>
+            <button
+              class="delete"
+              aria-label="close"
+              @click="classArray.pop()"
+            ></button>
+          </header>
+          <section class="modal-card-body px-5 py-3">
+            <div class="content">
+              <div class="columns">
+                <div class="column">
+                  <label>จำนวนที่แก้ไข</label>
+                  <input class="input" type="number" />
                 </div>
-            </section>
+              </div>
+              <div class="columns">
+                <div class="column">
+                  <label>หมายเหตุ</label>
+                  <textarea class="textarea"></textarea>
+                </div>
+              </div>
+              <div class="field is-grouped">
+                <div class="control">
+                  <button
+                    class="button is-link px-4"
+                    @click="update_product(), classArray.pop()"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
-        </div>
+      </div>
 
-    <!-- modal จำนวนเพิ่มสินค้า -->
-    <div id="modal4" :class="classArray3">
+      <!-- modal จำนวนเพิ่มสินค้า -->
+      <div id="modal4" :class="classArray3">
         <div class="modal-background"></div>
-            <div class="modal-card">
-                <header class="modal-card-head px-5 py-3">
-                    <p class="modal-card-title">เพิ่มจำนวนสินค้า</p>
-                    <button class="delete" aria-label="close" @click="classArray3.pop()"></button>
-                </header>
-                <section class="modal-card-body px-5 py-3">
-                    <div class="content">
-                        <div class="columns">
-                            <div class="column">
-                                <label>จำนวนที่เพิ่ม</label>
-                                <input  class="input" type="number" />
-                            </div>
-                        </div>
-                        <div class="columns">
-                            <div class="column">
-                                <label>หมายเหตุ</label>
-                                <textarea class="textarea"></textarea>
-                            </div>
-                        </div>
-                        <div class="field is-grouped">
-                            <div class="control">
-                                <button class="button is-link px-4"
-                                    @click="classArray3.pop()">Submit</button>
-                            </div>
-                        </div>
-                            </div>
-                        </section>
-                    </div>
+        <div class="modal-card">
+          <header class="modal-card-head px-5 py-3">
+            <p class="modal-card-title">เพิ่มจำนวนสินค้า</p>
+            <button
+              class="delete"
+              aria-label="close"
+              @click="classArray3.pop()"
+            ></button>
+          </header>
+          <section class="modal-card-body px-5 py-3">
+            <div class="content">
+              <div class="columns">
+                <div class="column">
+                  <label>จำนวนที่เพิ่ม</label>
+                  <input class="input" type="number" />
                 </div>
+              </div>
+              <div class="columns">
+                <div class="column">
+                  <label>หมายเหตุ</label>
+                  <textarea class="textarea"></textarea>
+                </div>
+              </div>
+              <div class="field is-grouped">
+                <div class="control">
+                  <button
+                    class="button is-link px-4"
+                    @click="classArray3.pop()"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -471,6 +515,14 @@ export default {
       classArrayWheel: ["modal"],
       classArray3: ["modal"],
     };
+  },
+  methods: {
+    logout() {
+      console.log(1);
+      localStorage.removeItem("token").then(() => {
+        this.$router.push({ path: "/" });
+      });
+    },
   },
 };
 </script>

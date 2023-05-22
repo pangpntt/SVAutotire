@@ -76,6 +76,7 @@ router.beforeEach((to, from, next) => {
     }
   
     if (to.meta.guess && isLoggedIn) {
+        console.log(2)
       alert("You've already logged in")
       next({ path: '/stock'})
     }
