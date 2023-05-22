@@ -80,6 +80,14 @@ router.beforeEach((to, from, next) => {
       next({ path: '/stock'})
     }
 
+    if(to.meta.guess){
+        const {name, role} = getUserInfoFromToken(isLoggedIn)
+        if(role === 'Employee'){
+            alert(`${name}`+' ไม่สามารถเข้าถึงได้')
+            next({path: '/stock'})
+        }
+    }
+
   
     next()
   })
